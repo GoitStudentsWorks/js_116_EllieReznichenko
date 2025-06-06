@@ -1,0 +1,4 @@
+.color-default .star-filled::before,
+.color-default .star-half::before {
+  color: #764191 !important;
+}
