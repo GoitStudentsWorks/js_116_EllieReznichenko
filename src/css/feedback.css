@@ -1,4 +1,5 @@
-.color-default .star-filled::before,
-.color-default .star-half::before {
+.rating.large .star {
   color: #764191 !important;
+  z-index: 100;
+  fill: #764191;
 }

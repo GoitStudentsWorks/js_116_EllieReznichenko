@@ -51,7 +51,7 @@ export const getRandomFeedbacks = async (count = 3) => {
 document.addEventListener('DOMContentLoaded', () => {
   new Swiper('.swiper', {
     direction: 'horizontal',
-    loop: true,
+    loop: false,
     modules: [Navigation, Pagination],
     pagination: {
       el: '.swiper-pagination',
@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const wrapper = document.querySelector('.swiper-wrapper');
     wrapper.innerHTML = '';
-
     feedbacks.forEach(fb => {
       const { name, descr, rating } = fb;
 
@@ -94,9 +93,38 @@ document.addEventListener('DOMContentLoaded', () => {
       slide.className = 'swiper-slide';
       slide.innerHTML = `
           <div class="feedback-card">
+            <div class="rating large star-icon direction-rtl value-${rating} half label-hidden">
+   <div class="label-value">1.5</div>
+    <div class="star-container">
+        <div class="star">
+            <i class="star-empty"></i>
+            <i class="star-half"></i>
+            <i class="star-filled"></i>
+        </div>
+        <div class="star">
+            <i class="star-empty"></i>
+            <i class="star-half"></i>
+            <i class="star-filled"></i>
+        </div>
+        <div class="star">
+            <i class="star-empty"></i>
+            <i class="star-half"></i>
+            <i class="star-filled"></i>
+        </div>
+        <div class="star">
+            <i class="star-empty"></i>
+            <i class="star-half"></i>
+            <i class="star-filled"></i>
+        </div>
+        <div class="star">
+            <i class="star-empty"></i>
+            <i class="star-half"></i>
+            <i class="star-filled"></i>
+        </div>
+    </div>
+</div>
             <p>${descr}</p>
             <h3>${name}</h3>
-            <div class="rating rating-${rating}"></div>
           </div>
         `;
       wrapper.appendChild(slide);
