@@ -1,0 +1,5 @@
+.rating.large .star {
+  color: #764191 !important;
+  z-index: 100;
+  fill: #764191;
+}
