@@ -1,15 +1,13 @@
 
 /* ======== Header ======== */
 header {
-  background-color: black;
   display: block;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  font-family: var(--font-family);
-  font-weight: 400;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 18px;
   line-height: 150%;
 }
@@ -35,7 +33,7 @@ header {
   padding: 0;
 }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
   .header-container {
       width: 1312px;
       height: 51px;
