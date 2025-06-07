@@ -1,47 +1,14 @@
-// const burgerBtn = document.querySelector('[data-header-open]');
-// const mobileMenu = document.querySelector('[data-menu]');
-// const mobileCloseBtn = document.querySelector('[data-menu-close]');
+const burgerBtn = document.querySelector('[data-header-open]');
+const mobileMenu = document.querySelector('[data-menu]');
+const mobileCloseBtn = document.querySelector('[data-menu-close]');
 
-// burgerBtn.addEventListener('click', toggleMobileMenu);
-// mobileCloseBtn.addEventListener('click', toggleMobileMenu);
+burgerBtn.addEventListener('click', toggleMobileMenu);
+mobileCloseBtn.addEventListener('click', toggleMobileMenu);
 
-// function toggleMobileMenu() {
-//   mobileMenu.classList.toggle('is-open');
-// }
-(() => {
-  const menuBtn = document.querySelector('[data-header-open]');
-  const closeBtn = document.querySelector('[data-menu-close]');
-  const mobileMenu = document.querySelector('[data-menu]');
-  const menuLinks = mobileMenu.querySelectorAll('.mob-nav-link');
+function toggleMobileMenu() {
+  mobileMenu.classList.toggle('is-open');
+}
 
-  // Открытие меню
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-  });
-
-  // Закрытие меню
-  closeBtn.addEventListener('click', () => {
-    mobileMenu.classList.remove('is-open');
-    document.body.style.overflow = '';
-  });
-
-  // Закрытие меню и плавный скролл по ссылкам
-  menuLinks.forEach(link => {
-    link.addEventListener('click', event => {
-      event.preventDefault();
-
-      const targetId = link.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetId);
-
-      if (targetSection) {
-        mobileMenu.classList.remove('is-open');
-        document.body.style.overflow = '';
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-})();
 // -------------закриття через клавішу Esc--------------
 document.addEventListener('keydown', closeMobileMenu);
 function closeMobileMenu(e) {
@@ -49,3 +16,18 @@ function closeMobileMenu(e) {
     mobileMenu.classList.remove('is-open');
   }
 }
+//------ Закрытие меню и плавный скролл по клику на ссылку ---------
+menuLinks.forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+
+    const targetId = link.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetId);
+
+    if (targetSection) {
+      mobileMenu.classList.remove('is-open');
+      document.body.style.overflow = '';
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
