@@ -14,12 +14,9 @@ header {
 }
 
 @media screen and (min-width: 768px) {
-  header {
     .nav-link {
         padding: 12px 0;
       }
-
-  }
 }
 
 .header-container {
