@@ -74,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mousewheel: {
       eventsTarget: '.swiper',
     },
+    slidesPerGroup: 1,
+    slidesPerView: 1,
   });
 });
 
@@ -123,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     </div>
 </div>
-            <p>${descr}</p>
-            <h3>${name}</h3>
+            <p class="feedback_description">${descr}</p>
+            <h3 class="feedback_name">${name}</h3>
           </div>
         `;
       wrapper.appendChild(slide);
