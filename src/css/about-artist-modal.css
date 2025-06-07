@@ -1,5 +1,5 @@
 body.modal-open {
-  overflow: hidden; /* заборона скролу під час відкритої модалки */
+  overflow: hidden;
 }
 
 .artist-list {
@@ -15,7 +15,7 @@ body.modal-open {
 }
 
 .modal {
-  display: none; /* за замовчуванням модалка прихована */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -28,7 +28,7 @@ body.modal-open {
 }
 
 .modal.is-open {
-  display: flex; /* показуємо модалку */
+  display: flex;
 }
 
 .modal-content {
@@ -36,7 +36,7 @@ body.modal-open {
   max-width: 700px;
   width: 90%;
   max-height: 80vh;
-  overflow-y: auto; /* вертикальна прокрутка, якщо вміст більший за висоту */
+  overflow-y: auto;
   padding: 20px;
   border-radius: 8px;
   position: relative;
@@ -70,7 +70,7 @@ body.modal-open {
   font-size: 20px;
   color: white;
   z-index: 1010;
-  display: none; /* за замовчуванням прихований */
+  display: none;
 }
 
 table {

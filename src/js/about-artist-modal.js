@@ -6,13 +6,11 @@ const loader = document.querySelector('.loader');
 
 let youtubeListeners = [];
 
-// Відкриття модалки
 function openModal() {
   modal.classList.add('is-open');
   document.body.style.overflow = 'hidden';
 }
 
-// Закриття модалки і очищення слухачів
 function closeModal() {
   modal.classList.remove('is-open');
   document.body.style.overflow = '';
@@ -20,7 +18,6 @@ function closeModal() {
   removeYoutubeListeners();
 }
 
-// Зняття слухачів з YouTube кнопок
 function removeYoutubeListeners() {
   youtubeListeners.forEach(({ element, handler }) => {
     element.removeEventListener('click', handler);
@@ -28,7 +25,6 @@ function removeYoutubeListeners() {
   youtubeListeners = [];
 }
 
-// Додавання слухачів на YouTube кнопки
 function addYoutubeListeners() {
   const buttons = modalContent.querySelectorAll('.youtube-btn');
   buttons.forEach(button => {
@@ -41,7 +37,6 @@ function addYoutubeListeners() {
   });
 }
 
-// Рендер модального вікна виконавця
 function renderArtistModal(artist) {
   const yearsInfo = artist.yearFormed
     ? artist.yearDisbanded
@@ -111,29 +106,24 @@ function renderArtistModal(artist) {
       ${albumsHtml}
     </div>`;
 
-  // Закриття модалки по кнопці
   modalContent
     .querySelector('.button-close')
     .addEventListener('click', closeModal);
 
-  // Додаємо слухачі на YouTube кнопки
   addYoutubeListeners();
 }
 
-// Функція завантаження артиста і відкриття модалки
 async function fetchArtistAndOpenModal(id) {
   try {
     loader.style.display = 'block';
     modalContent.innerHTML = '';
     openModal();
 
-    // Запит до API артиста
     const response = await axios.get(
       `https://sound-wave.b.goit.study/api/artists/${id}`
     );
     const artist = response.data;
 
-    // Запит альбомів артиста
     const albumsRes = await axios.get(
       `https://sound-wave.b.goit.study/api/albums`
     );
@@ -149,7 +139,6 @@ async function fetchArtistAndOpenModal(id) {
   }
 }
 
-// Відкриття модалки по кліку на артиста
 document.querySelector('.artist-list').addEventListener('click', e => {
   const card = e.target.closest('.artist-card');
   if (!card) return;
@@ -157,12 +146,10 @@ document.querySelector('.artist-list').addEventListener('click', e => {
   fetchArtistAndOpenModal(artistId);
 });
 
-// Закриття модалки по кліку на бекдроп
 modal.addEventListener('click', e => {
   if (e.target === modal) closeModal();
 });
 
-// Закриття по Escape
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
