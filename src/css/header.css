@@ -15,6 +15,7 @@ header {
   line-height: 150%;
 }
 
+
 @media screen and (min-width: 768px) {
     .nav-link {
         padding: 12px 0;
@@ -23,7 +24,7 @@ header {
         min-width: 768px;
         height: 72px;
         }
-}
+
 
 .header-container {
   width: 640px;
