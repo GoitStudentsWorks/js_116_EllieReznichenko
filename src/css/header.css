@@ -2,9 +2,11 @@
 /* ======== Header ======== */
 header {
   background-color: black;
-  display: block;
+  display: flex;
   width: 100%;
   position: fixed;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -13,13 +15,14 @@ header {
   line-height: 150%;
 }
 
-@media screen and (min-width: 768px) {
-  header {
+@media screen and (min-width: 768px) {
     .nav-link {
         padding: 12px 0;
       }
-
-  }
+    header {
+        min-width: 768px;
+        height: 72px;
+        }
 }
 
 .header-container {
@@ -33,13 +36,15 @@ header {
 @media (min-width: 768px) {
   .header-container {
   width: 640px;
-  padding: 0;
 }
 }
 @media (min-width: 1440px) {
   .header-container {
       width: 1312px;
       height: 51px;
+    }
+  header {
+    min-width: 1440px;
     }
 }
 
