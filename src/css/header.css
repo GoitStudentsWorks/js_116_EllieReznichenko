@@ -1,6 +1,7 @@
 
 /* ======== Header ======== */
 header {
+  background-color: black;
   display: block;
   width: 100%;
   position: fixed;
@@ -12,16 +13,18 @@ header {
   line-height: 150%;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   header {
-    padding: 10.5px 0;
-    top: 0 32px;
+    .nav-link {
+        padding: 12px 0;
+      }
+
   }
 }
 
 .header-container {
   width: 640px;
-  padding: 6.5px 12px 6.5px 20px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
