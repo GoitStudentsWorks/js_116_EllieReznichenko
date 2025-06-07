@@ -35,6 +35,12 @@
   fill: #764191;
 }
 
+.mob-menu-logo-icon:hover,
+.mob-menu-logo-icon:focus,
+.mob-menu-logo-icon:active {
+  fill: #ffffff;
+}
+
 .mob-menu-close {
   background-color: transparent;
   border: none;
@@ -46,6 +52,14 @@
 
 .mob-menu-close-icon {
   fill: #ffffff;
+}
+
+.mob-menu-close-icon:hover,
+.mob-menu-close-icon:focus {
+  fill: #764191;
+}
+.mob-menu-close-icon:active {
+  fill: #988aa0;
 }
 
 .mob-nav {
@@ -65,4 +79,13 @@
   font-weight: 500;
   font-size: 26px;
   line-height: 150%;
+}
+
+.mob-nav-link:hover,
+.mob-nav-link:focus {
+  color: #764191;
+}
+
+.mob-nav-link:active {
+  color: #988aa0;
 }

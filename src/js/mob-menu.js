@@ -8,3 +8,11 @@ mobileCloseBtn.addEventListener('click', toggleMobileMenu);
 function toggleMobileMenu() {
   mobileMenu.classList.toggle('is-open');
 }
+
+// -------------закриття через клавішу Esc--------------
+document.addEventListener('keydown', closeMobileMenu);
+function closeMobileMenu(e) {
+  if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+    mobileMenu.classList.remove('is-open');
+  }
+}
