@@ -1,4 +1,3 @@
-
 /* ======== Header ======== */
 header {
   background-color: black;
@@ -15,16 +14,15 @@ header {
   line-height: 150%;
 }
 
-
 @media screen and (min-width: 768px) {
-    .nav-link {
-        padding: 12px 0;
-      }
-    header {
-        min-width: 768px;
-        height: 72px;
-        }
-
+  .nav-link {
+    padding: 12px 0;
+  }
+  header {
+    min-width: 768px;
+    height: 72px;
+  }
+}
 
 .header-container {
   width: 640px;
@@ -36,19 +34,18 @@ header {
 
 @media (min-width: 768px) {
   .header-container {
-  width: 640px;
-}
+    width: 640px;
+  }
 }
 @media (min-width: 1440px) {
   .header-container {
-      width: 1312px;
-      height: 51px;
-    }
+    width: 1312px;
+    height: 51px;
+  }
   header {
     min-width: 1440px;
-    }
+  }
 }
-
 
 .svg {
   fill: #ffffff;
@@ -72,22 +69,20 @@ header {
   .logo-header {
     fill: #ffffff;
   }
-    .logo-header:hover,
-    .logo-header:focus {
-      fill: #764191;
-    }
-  
-    .logo-header:active {
-      fill: #988aa0;
-    }
-}
+  .logo-header:hover,
+  .logo-header:focus {
+    fill: #764191;
+  }
 
+  .logo-header:active {
+    fill: #988aa0;
+  }
+}
 
 .icon-logo {
   width: 119px;
   height: 51px;
 }
-
 
 /* ======== Navigation ======== */
 .nav-list {
@@ -148,6 +143,6 @@ section {
 }
 @media (min-width: 768px) {
   section {
-      scroll-margin-top: 72px;
-    }
+    scroll-margin-top: 72px;
+  }
 }
