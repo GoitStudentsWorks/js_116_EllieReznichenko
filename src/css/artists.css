@@ -1,8 +1,6 @@
-.containerr {
-  padding-left: 16px;
+.artists-container {
   padding-top: 64px;
   padding-bottom: 64px;
-  padding-right: 16px;
 }
 
 
@@ -29,7 +27,9 @@ letter-spacing: -0.01em;   /* -0.44px / 44px */
 text-align: left;
 }
 
-
+.icon{
+  fill: #ffffff;
+}
 
 /* Карточка артиста */
 .artist-card {
@@ -124,16 +124,18 @@ display: inline-flex;
   display: block;
   width: 100%;
   padding: 12px;
+  gap: 12px; 
   margin-bottom: 32px;
-  background-color: #9f7aea;
   border: none;
-  border-radius: 8px;
   color: #fff;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0px 1px 2px 0px rgba(6, 3, 7, 0.05),inset 0px -2px 1px 0px rgba(0, 0, 0, 0.2),inset 0px 0px 0px 1px rgba(6, 3, 7, 0.15),inset 0px 2px 1px 0px rgba(255, 255, 255, 0.25),inset 0px 32px 24px 0px rgba(255, 255, 255, 0.05);
+  background: rgb(118, 65, 145);
 }
 
 .learn-more .icon {
-  fill: #ffffff; 
+  fill: #ffffff;    
 }
