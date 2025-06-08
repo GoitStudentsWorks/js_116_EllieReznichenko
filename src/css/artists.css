@@ -103,6 +103,7 @@ display: inline-flex;
   align-items: center; 
   gap: 8px; 
   color: rgb(255, 255, 255);
+  background-color: black;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.5;
@@ -116,7 +117,7 @@ display: inline-flex;
 
 
 /* Кнопка "Load More" */
-.load-more {
+.load-more-btn {
   display: block;
   width: 100%;
   padding: 12px;
@@ -134,4 +135,9 @@ display: inline-flex;
 
 .learn-more .icon {
   fill: #ffffff;    
+}
+
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
