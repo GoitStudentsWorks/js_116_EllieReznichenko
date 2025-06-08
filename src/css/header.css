@@ -1,9 +1,11 @@
-
 /* ======== Header ======== */
 header {
-  display: block;
+  background-color: black;
+  display: flex;
   width: 100%;
   position: fixed;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -12,16 +14,19 @@ header {
   line-height: 150%;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
+  .nav-link {
+    padding: 12px 0;
+  }
   header {
-    padding: 10.5px 0;
-    top: 0 32px;
+    min-width: 768px;
+    height: 72px;
   }
 }
 
 .header-container {
   width: 640px;
-  padding: 6.5px 12px 6.5px 20px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,17 +34,18 @@ header {
 
 @media (min-width: 768px) {
   .header-container {
-  width: 640px;
-  padding: 0;
-}
+    width: 640px;
+  }
 }
 @media (min-width: 1440px) {
   .header-container {
-      width: 1312px;
-      height: 51px;
-    }
+    width: 1312px;
+    height: 51px;
+  }
+  header {
+    min-width: 1440px;
+  }
 }
-
 
 .svg {
   fill: #ffffff;
@@ -63,22 +69,20 @@ header {
   .logo-header {
     fill: #ffffff;
   }
-    .logo-header:hover,
-    .logo-header:focus {
-      fill: #764191;
-    }
-  
-    .logo-header:active {
-      fill: #988aa0;
-    }
-}
+  .logo-header:hover,
+  .logo-header:focus {
+    fill: #764191;
+  }
 
+  .logo-header:active {
+    fill: #988aa0;
+  }
+}
 
 .icon-logo {
   width: 119px;
   height: 51px;
 }
-
 
 /* ======== Navigation ======== */
 .nav-list {
@@ -139,6 +143,6 @@ section {
 }
 @media (min-width: 768px) {
   section {
-      scroll-margin-top: 72px;
-    }
+    scroll-margin-top: 72px;
+  }
 }
