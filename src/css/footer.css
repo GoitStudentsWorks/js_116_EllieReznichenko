@@ -25,7 +25,7 @@
 }
 
 .footer-logo:active .footer-logo-icon {
-  fill: #ffffff;
+  fill: #988aa0;
 }
 
 .footer-nav-list {
@@ -39,6 +39,15 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 150%;
+}
+
+.footer-nav-link:hover,
+.footer-nav-link:focus {
+  color: #764191;
+}
+
+.footer-nav-link:active {
+  color: #988aa0;
 }
 
 .footer-links {
@@ -58,8 +67,9 @@
   margin-bottom: 32px;
 }
 
-.footer-link:active .footer-links-icon .footer-link:focus .footer-links-icon {
-  fill: #ffffff;
+.footer-link:active .footer-links-icon,
+.footer-link:focus .footer-links-icon {
+  fill: #988aa0;
 }
 
 .footer-links-icon {

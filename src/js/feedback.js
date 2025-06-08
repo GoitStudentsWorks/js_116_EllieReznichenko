@@ -8,9 +8,9 @@ import 'swiper/css/pagination';
 
 import Raty from 'raty-js';
 
+
 import { fetchFeedbacks } from './artists-api';
 
-// Функция округлення рейтингу
 function roundRating(rating) {
   return Math.round(rating);
 }
@@ -26,6 +26,7 @@ function processFeedbacks(rawFeedbacks) {
 console.log(roundRating);
 
 // Отримання випадкових відгуків
+
 const getRandomFeedbacks = async (count = 3) => {
   try {
     const all = await fetchFeedbacks();
