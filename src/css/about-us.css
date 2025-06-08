@@ -27,7 +27,6 @@
     color: #ffffff;
   }
   .aboutUs-text {
-    font-weight: 400;
     font-size: 18px;
     color: #ffffff;
   }
@@ -63,7 +62,6 @@
     color: #ffffff;
   }
   .aboutUs-text {
-    font-weight: 400;
     font-size: 20px;
   }
 }
@@ -76,17 +74,11 @@
     height: 664px;
     display: flex;
     align-items: center;
-
-    /*margin-right: auto;
-    margin-left: auto;*/
   }
 
   .container-about-us {
     padding-bottom: 112px;
     padding-top: 112px;
-  }
-
-  .about-us {
   }
 
   .photo-aboutUs {
@@ -97,10 +89,7 @@
     padding-left: 32px;
     margin-top: 0px;
   }
-  .aboutUs-svg-list {
-  }
-  .aboutUs-svg {
-  }
+
   .aboutUs-artistsHub {
     letter-spacing: 0.001em;
   }
@@ -108,10 +97,6 @@
     width: 640px;
 
     padding-bottom: 0;
-
-    /*
-    display: flex;
-    align-items: center;*/
   }
   .image-wrapper {
     margin-right: 20px;
