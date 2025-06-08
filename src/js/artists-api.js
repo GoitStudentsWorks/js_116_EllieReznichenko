@@ -1,11 +1,8 @@
 
 export const API_BASE = 'https://sound-wave.b.goit.study/api';
 
-
 export let currentPage = 1;
-
 export const limit = 8;
-
 
 export function showToast(message) {
   alert(message);
@@ -22,7 +19,6 @@ export async function fetchArtistById(id) {
   if (!res.ok) throw new Error('Не вдалося завантажити деталі артиста');
   return await res.json();
 }
-
 
 export async function renderArtists() {
   showLoader();
@@ -55,30 +51,9 @@ export async function renderArtists() {
 
 
 
-loadMoreBtn.addEventListener('click', () => {
-  currentPage++;
-  // Збільшуємо номер сторінки
+export const FEEDBACK_API = 'https://sound-wave.b.goit.study/api/feedbacks';
 
-  renderArtists();
-  // Завантажуємо та додаємо нових артистів
-});
-
-renderArtists();
-// Початкове завантаження артистів при завантаженні сторінки
-
-
-
-
-
-
-
-
-
-
-
-const FEEDBACK_API = 'https://sound-wave.b.goit.study/api/feedbacks';
-
-async function fetchFeedbacks() {
+export async function fetchFeedbacks() {
   try {
     const res = await fetch(FEEDBACK_API);
     if (!res.ok) throw new Error('Failed to load feedbacks');
