@@ -10,10 +10,7 @@ const refs = {
 };
 
 const artists = [
-  { id: '1', name: 'Ren',
-     genres: ['Alternative', 'Pop', 'Rock', 'Indie'], 
-     image: '/img/artists/Placeholder_Image.jpg', 
-     bio: 'Ren Eryn Gill, known professionally as Ren, is a multi-award-winning...' },
+  { id: '1', name: 'Ren', genres: ['Alternative', 'Pop', 'Rock', 'Indie'], image: '/img/artists/Placeholder_Image.jpg', bio: 'Ren Eryn Gill, known professionally as Ren, is a multi-award-winning...' },
   { id: '2', name: 'Unlike Pluto', genres: ['Alternative', 'Pop', 'Rock', 'Indie'], image: '/img/artists/Placeholder_Image1.jpg', bio: 'A look at the influential figures who shaped jazz music history.' },
   { id: '3', name: 'Sleepy Hallow', genres: ['Alternative', 'Pop', 'Rock', 'Indie'], image: '/img/artists/Placeholder_Image2.jpg', bio: 'A look at the influential figures who shaped jazz music history.' },
   { id: '4', name: 'Samara Cyn', genres: ['Alternative', 'Pop', 'Rock', 'Indie'], image: '/img/artists/Placeholder_Image3.jpg', bio: 'A look at the influential figures who shaped jazz music history.' },
@@ -65,8 +62,10 @@ function renderArtistsChunk() {
 document.addEventListener('DOMContentLoaded', () => {
   renderArtistsChunk();
 
+  // Кнопка "Load More"
   refs.loadMoreBtn.addEventListener('click', renderArtistsChunk);
 
+  // Обробник кліку на картку (включаючи кнопку "Learn More")
   refs.artistCardsContainer.addEventListener('click', (e) => {
     const btn = e.target.closest('.learn-more');
     if (!btn) return;
@@ -75,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const artist = artists.find(a => a.id === artistId);
     if (!artist) return;
 
+    // Заповнення та показ модального вікна
     refs.modalName.textContent = artist.name;
     refs.modalImage.src = artist.image;
     refs.modalImage.alt = artist.name;
@@ -83,7 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
     refs.modal.classList.remove('hidden');
   });
 
+  // Закриття модалки при кліку на ✖
+  refs.modalClose.addEventListener('click', () => {
+    refs.modal.classList.add('hidden');
+  });
 
+  // Закриття модалки через Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !refs.modal.classList.contains('hidden')) {
       refs.modal.classList.add('hidden');
