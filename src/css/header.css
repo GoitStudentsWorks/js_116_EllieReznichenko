@@ -1,18 +1,20 @@
-
 /* ======== Header ======== */
 header {
   background-color: black;
-  display: flex;
-  width: 100%;
   position: fixed;
-  justify-content: center;
-  align-items: center;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 1000;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 18px;
-  line-height: 150%;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 18px;
+    line-height: 150%;
 }
 
 
@@ -20,35 +22,35 @@ header {
     .nav-link {
         padding: 12px 0;
       }
-    header {
-        min-width: 768px;
-        height: 72px;
+        .nav {
+        margin: 0 auto;
+        max-width: 640px;
+        height: 51px;
         }
-
+}
 
 .header-container {
-  width: 640px;
-
+  height: 68px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .header-container {
-  width: 640px;
+  max-width: 768px;
+  height: 72px;
 }
-}
-@media (min-width: 1440px) {
-  .header-container {
-      width: 1312px;
-      height: 51px;
-    }
-  header {
-    min-width: 1440px;
-    }
-}
+  }
 
+@media screen and (min-width: 1440px) {
+  .header-container {
+    max-width: 1440px;
+    }
+    .nav {
+    max-width: 1440px;
+    }  
+}
 
 .svg {
   fill: #ffffff;
@@ -72,22 +74,20 @@ header {
   .logo-header {
     fill: #ffffff;
   }
-    .logo-header:hover,
-    .logo-header:focus {
-      fill: #764191;
-    }
-  
-    .logo-header:active {
-      fill: #988aa0;
-    }
-}
+  .logo-header:hover,
+  .logo-header:focus {
+    fill: #764191;
+  }
 
+  .logo-header:active {
+    fill: #988aa0;
+  }
+}
 
 .icon-logo {
   width: 119px;
   height: 51px;
 }
-
 
 /* ======== Navigation ======== */
 .nav-list {
@@ -148,6 +148,6 @@ section {
 }
 @media (min-width: 768px) {
   section {
-      scroll-margin-top: 72px;
-    }
+    scroll-margin-top: 72px;
+  }
 }

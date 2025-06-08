@@ -20,6 +20,7 @@
   }
 
   .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
     margin-top: 20px;
     margin-bottom: 20px;
     font-weight: 700;
@@ -27,7 +28,6 @@
     color: #ffffff;
   }
   .aboutUs-text {
-    font-weight: 400;
     font-size: 18px;
     color: #ffffff;
   }
@@ -55,10 +55,8 @@
     width: 80px;
     height: 80px;
   }
-  .aboutUs-svg-list {
-    font-size: 0;
-  }
   .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
     margin-top: 24px;
     margin-bottom: 24px;
     font-weight: 700;
@@ -66,7 +64,6 @@
     color: #ffffff;
   }
   .aboutUs-text {
-    font-weight: 400;
     font-size: 20px;
   }
 }
@@ -76,20 +73,14 @@
 @media screen and (min-width: 1440px) {
   .flex-container {
     width: 1312px;
-    /*height: 664px;*/
+    height: 664px;
     display: flex;
     align-items: center;
-
-    /*margin-right: auto;
-    margin-left: auto;*/
   }
 
   .container-about-us {
     padding-bottom: 112px;
     padding-top: 112px;
-  }
-
-  .about-us {
   }
 
   .photo-aboutUs {
@@ -100,24 +91,15 @@
     padding-left: 32px;
     margin-top: 0px;
   }
-  .aboutUs-svg-list {
-  }
-  .aboutUs-svg {
-  }
+
   .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
     letter-spacing: 0.001em;
-    font-size: 60px;
   }
   .aboutUs-text {
     width: 640px;
-    line-height: 1.5;
-    padding-bottom: 0;
-    font-size: 20px;
-    font-weight: 400;
 
-    /*
-    display: flex;
-    align-items: center;*/
+    padding-bottom: 0;
   }
   .image-wrapper {
     margin-right: 20px;

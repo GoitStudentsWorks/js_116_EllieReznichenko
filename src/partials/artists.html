@@ -1,1 +1,22 @@
-<section>Artists</section>
+<section class="artist-section">
+  <div class="container artists-container">
+    <h2 class="main-title">Artists</h2>
+    <h2 class="subtitle">Explore Your New Favorite Artists</h2>
+
+    <!-- Контейнер для динамічного завантаження карток -->
+    <ul id="artists-grid" class="artists-grid">
+      <!-- JavaScript вставлятиме сюди картки артистів -->
+    </ul>
+
+    <!-- Лоадер -->
+    <div class="loader" style="visibility: hidden;">Loading...</div>
+
+    <!-- Кнопка для завантаження ще -->
+    <button id="load-more-btn" class="load-more">
+      <span>Load More</span>
+      <svg class="icon" width="24" height="24">
+        <use href="/img/sprite.svg#icon-down-arrow-load-more"></use>
+      </svg>
+    </button>
+  </div>
+</section>
