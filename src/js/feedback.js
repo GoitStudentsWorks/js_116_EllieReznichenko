@@ -8,6 +8,8 @@ import 'swiper/css/pagination';
 
 import Raty from 'raty-js';
 
+import { fetchFeedbacks } from './artists-api';
+
 // Функция округлення рейтингу
 function roundRating(rating) {
   return Math.round(rating);
@@ -24,12 +26,9 @@ function processFeedbacks(rawFeedbacks) {
 console.log(roundRating);
 
 // Отримання випадкових відгуків
-export const getRandomFeedbacks = async (count = 3) => {
+const getRandomFeedbacks = async (count = 3) => {
   try {
-    const response = await axios.get(
-      'https://sound-wave.b.goit.study/api/feedbacks'
-    );
-    const all = response.data.data;
+    const all = await fetchFeedbacks();
 
     const random = [];
     const used = new Set();
