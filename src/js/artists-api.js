@@ -1,29 +1,29 @@
-const API_BASE = 'https://sound-wave.b.goit.study/api';
+export const API_BASE = 'https://sound-wave.b.goit.study/api';
 
 
-let currentPage = 1;
+export let currentPage = 1;
 
-const limit = 8;
+export const limit = 8;
 
 
-function showToast(message) {
+export function showToast(message) {
   alert(message);
 }
 
-async function fetchArtists(page = 1, limit = 8) {
+export async function fetchArtists(page = 1, limit = 8) {
   const res = await fetch(`${API_BASE}/artists?page=${page}&limit=${limit}`);
   if (!res.ok) throw new Error('Не вдалося завантажити артистів');
   return await res.json();
 }
 
-async function fetchArtistById(id) {
+export async function fetchArtistById(id) {
   const res = await fetch(`${API_BASE}/artists/${id}`);
   if (!res.ok) throw new Error('Не вдалося завантажити деталі артиста');
   return await res.json();
 }
 
 
-async function renderArtists() {
+export async function renderArtists() {
   showLoader();
   // Показуємо індикатор завантаження
 
