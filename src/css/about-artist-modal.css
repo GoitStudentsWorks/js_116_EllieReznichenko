@@ -32,7 +32,8 @@ body.modal-open {
 }
 
 .modal-content {
-  background: white;
+  background-color: white;
+  color: rgb(14, 14, 13);
   max-width: 700px;
   width: 90%;
   max-height: 80vh;
