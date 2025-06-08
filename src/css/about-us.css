@@ -20,6 +20,7 @@
   }
 
   .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
     margin-top: 20px;
     margin-bottom: 20px;
     font-weight: 700;
@@ -56,6 +57,7 @@
     height: 80px;
   }
   .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
     margin-top: 24px;
     margin-bottom: 24px;
     font-weight: 700;
@@ -102,6 +104,7 @@
   .aboutUs-svg {
   }
   .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
     letter-spacing: 0.001em;
   }
   .aboutUs-text {
