@@ -101,26 +101,26 @@ function renderArtistModal(artist) {
     : '<p>Albums information missing</p>';
 
   modalContent.innerHTML = `
-    <button class="button-close" aria-label="Close">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <h2 class="artist-mod-title">${artist.name}</h2>
-    ${
-      imageUrl
-        ? `<img class="artist-image" src="${imageUrl}" alt="${artist.name}" style="width: 576px; height: 354px;">`
-        : ''
-    }
-    <div class="artist-info">
-      <p><strong>Years active</strong> ${yearsInfo}</p>
-      <p><strong>Sex</strong> ${gender}</p>
-      <p><strong>Members</strong> ${membersCount}</p>
-      <p><strong>Country</strong> ${country}</p>
-      <p class="biography"><strong>Biography</strong> ${biography}</p>
-      <div class="genres">
-        <strong>Genres</strong> ${genres}
+    <div class="modal-header">
+      <h2 class="artist-mod-title">${artist.name}</h2>
+      <button class="button-close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="artist-main-info">
+      <img class="artist-image" src="${imageUrl}" alt="${artist.name}">
+      <div class="artist-info">
+        <p><strong>Years active</strong> ${yearsInfo}</p>
+        <p><strong>Sex</strong> ${gender}</p>
+        <p><strong>Members</strong> ${membersCount}</p>
+        <p><strong>Country</strong> ${country}</p>
+        <p class="biography"><strong>Biography</strong> ${biography}</p>
+        <div class="genres">
+          <strong>Genres</strong> ${genres}
+        </div>
       </div>
     </div>
     <div class="albums">

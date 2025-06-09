@@ -14,6 +14,7 @@ body.modal-open {
   width: 200px;
 }
 
+/* Модалка на весь екран */
 .modal {
   font-family: 'IBM Plex Sans', sans-serif;
   display: none;
@@ -22,7 +23,7 @@ body.modal-open {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.65);
+  background-color: black;
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -34,15 +35,16 @@ body.modal-open {
 }
 
 .modal-content {
-  background: linear-gradient(135deg, #181818 60%, #232526 100%);
+  background: #060307;
   color: #fff;
-  width: 95vw;
-  max-width: 600px;
-  max-height: 90vh;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   overflow-y: auto;
   padding: 32px 20px 24px 20px;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  border-radius: 0;
+  box-shadow: none;
   position: relative;
   font-family: 'IBM Plex Sans', Arial, sans-serif;
   letter-spacing: 0.01em;
@@ -61,9 +63,10 @@ body.modal-open {
 }
 
 .button-close {
-  position: absolute;
-  top: 18px;
-  right: 18px;
+  position: static;
+  margin-left: auto;
+  top: auto;
+  right: auto;
   cursor: pointer;
   padding: 6px 14px;
   background: #181818;
@@ -80,26 +83,60 @@ body.modal-open {
   background: #2f2d2d;
 }
 
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
 .artist-mod-title {
   font-weight: 700;
   font-size: 2rem;
   line-height: 130%;
-  text-align: center;
-  margin-bottom: 18px;
+  text-align: left;
+  margin-bottom: 0;
   letter-spacing: -0.01em;
 }
 
-.artist-image {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin: 0 auto 18px auto;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+.artist-main-info {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 32px;
 }
-
+@media (max-width: 900px) {
+  .artist-main-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+}
+.artist-image {
+  flex-shrink: 0;
+  width: 320px;
+  height: 196px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  display: block;
+}
+@media (max-width: 900px) {
+  .artist-image {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    margin: 0 auto;
+  }
+}
 .artist-info {
-  margin-bottom: 24px;
+  flex: 1 1 0%;
+  min-width: 0;
+  margin-bottom: 0;
 }
 
 .genres {
@@ -133,6 +170,19 @@ body.modal-open {
   font-size: 1.08rem;
   line-height: 1.5;
   color: #e0e0e0;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.biography::-webkit-scrollbar {
+  width: 6px;
+}
+.biography::-webkit-scrollbar-thumb {
+  background: #232526;
+  border-radius: 8px;
+}
+.biography::-webkit-scrollbar-track {
+  background: transparent;
 }
 .albums {
   margin-top: 28px;
@@ -209,25 +259,14 @@ tr:nth-child(odd) td {
 
 @media (max-width: 600px) {
   .modal-content {
-    padding: 16px 4px 16px 4px;
-    max-width: 98vw;
+    padding: 8px 0 8px 0;
     font-size: 0.98rem;
-  }
-  .artist-mod-title {
-    font-size: 1.2rem;
-  }
-  .albums h3 {
-    font-size: 1.05rem;
   }
 }
 
 @media (min-width: 900px) {
   .modal-content {
-    max-width: 700px;
     padding: 40px 40px 32px 40px;
-  }
-  .artist-mod-title {
-    font-size: 2.3rem;
   }
 }
 
