@@ -65,3 +65,9 @@ export async function fetchFeedbacks() {
   }
 }
 
+export async function fetchArtistsAlbumsById(artistId) {
+  const res = await fetch(`${API_BASE}/artists/${artistId}/albums`);
+  if (!res.ok) throw new Error('Не вдалося завантажити альбоми артиста');
+  return await res.json();
+}
+
