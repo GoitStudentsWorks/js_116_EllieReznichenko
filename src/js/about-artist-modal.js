@@ -3,6 +3,9 @@ import axios from 'axios';
 const modal = document.querySelector('.modal');
 const modalContent = modal.querySelector('.modal-content');
 const loader = document.querySelector('.loader');
+if (!loader) {
+  console.warn('Loader element not found in DOM!');
+}
 
 let youtubeListeners = [];
 
@@ -48,13 +51,23 @@ function renderArtistModal(artist) {
   const membersCount = artist.membersCount || 'information missing';
   const country = artist.country || 'information missing';
   const biography = artist.biography || 'information missing';
-  const genres = artist.genres?.length
-    ? artist.genres.join(', ')
+  // genres: завжди масив, навіть якщо приходить рядком або undefined
+  let genresArr = [];
+  if (Array.isArray(artist.genres)) {
+    genresArr = artist.genres.filter(Boolean);
+  } else if (typeof artist.genres === 'string') {
+    genresArr = artist.genres
+      .split(',')
+      .map(g => g.trim())
+      .filter(Boolean);
+  }
+  const genres = genresArr.length
+    ? genresArr.map(g => `<span class="genre">${g}</span>`).join(' ')
     : 'information missing';
   const imageUrl = artist.imageUrl || '';
 
   const albumsHtml = artist.albums?.length
-    ? artist.albums
+    ? `<div class="albums-grid">${artist.albums
         .map(album => {
           const tracksHeader = `
             <tr>
@@ -84,7 +97,7 @@ function renderArtistModal(artist) {
               </table>
             </div>`;
         })
-        .join('')
+        .join('')}</div>`
     : '<p>Albums information missing</p>';
 
   modalContent.innerHTML = `
@@ -133,7 +146,36 @@ async function fetchArtistAndOpenModal(id) {
       `https://sound-wave.b.goit.study/api/artists/${id}`
     );
     const artistRaw = response.data;
-    // Мапінг артиста під ваш формат
+    console.log(
+      'MODAL artistRaw:',
+      artistRaw,
+      'id:',
+      artistRaw._id,
+      'name:',
+      artistRaw.strArtist || artistRaw.name
+    );
+    console.log(
+      'MODAL artistRaw.genres:',
+      artistRaw.genres,
+      'typeof:',
+      typeof artistRaw.genres
+    );
+    // Формуємо genres для artist: якщо genres є масивом або рядком, беремо його, інакше пробуємо з artistRaw.genres
+    let genres = artistRaw.genres;
+    if (!genres && typeof artistRaw.genres !== 'undefined') {
+      genres = artistRaw.genres;
+    }
+    console.log(
+      'MODAL genres for artist:',
+      genres,
+      'typeof:',
+      typeof genres,
+      'id:',
+      artistRaw._id,
+      'name:',
+      artistRaw.strArtist || artistRaw.name
+    );
+    // Якщо genres undefined, не чіпаємо (renderArtistModal покаже 'information missing')
     const artist = {
       name: artistRaw.strArtist || artistRaw.name || 'No name',
       imageUrl: artistRaw.strArtistThumb || artistRaw.image || '',
@@ -146,40 +188,65 @@ async function fetchArtistAndOpenModal(id) {
       membersCount: artistRaw.intMembers || artistRaw.membersCount || '',
       country: artistRaw.strCountry || artistRaw.country || '',
       biography: artistRaw.strBiographyEN || artistRaw.bio || '',
-      genres: artistRaw.genres || [],
+      genres: genres,
       albums: [],
     };
+    console.log(
+      'MODAL artist.genres before modal:',
+      artist.genres,
+      'typeof:',
+      typeof artist.genres,
+      'id:',
+      artistRaw._id,
+      'name:',
+      artistRaw.strArtist || artistRaw.name
+    );
 
     // Якщо є albumsList, беремо його, інакше allAlbums
     let albumsArray = [];
     if (artistRaw.albumsList && Array.isArray(artistRaw.albumsList)) {
       albumsArray = artistRaw.albumsList;
     } else {
-      // Якщо API повертає allAlbums як масив
+      // Якщо API повертає allAlbums як масив або об'єкт
       const albumsRes = await axios.get(
         `https://sound-wave.b.goit.study/api/artists/${id}/albums`
       );
       const allAlbums = albumsRes.data;
-      albumsArray = Array.isArray(allAlbums)
-        ? allAlbums
-        : allAlbums.albums || [];
+      console.log('allAlbums:', allAlbums); // Діагностика альбомів
+      if (Array.isArray(allAlbums)) {
+        albumsArray = allAlbums;
+      } else if (allAlbums && Array.isArray(allAlbums.albums)) {
+        albumsArray = allAlbums.albums;
+      } else if (allAlbums && Array.isArray(allAlbums.albumsList)) {
+        albumsArray = allAlbums.albumsList;
+      } else if (allAlbums && Array.isArray(allAlbums.results)) {
+        albumsArray = allAlbums.results;
+      } else {
+        // fallback: якщо структура інша, покажемо її у консолі
+        console.warn('Unknown albums structure:', allAlbums);
+        albumsArray = [];
+      }
     }
 
     // Мапінг альбомів під ваш формат
+    console.log('albumsArray:', albumsArray); // Діагностика
     artist.albums = albumsArray.map(album => ({
       title: album.strAlbum || album.title || 'No title',
-      tracks: (album.tracks || []).map(track => ({
-        title: track.strTrack || track.title || 'No title',
-        duration: track.intDuration
-          ? Math.floor(track.intDuration / 60000) +
-            ':' +
-            String(Math.floor((track.intDuration % 60000) / 1000)).padStart(
-              2,
-              '0'
-            )
-          : '',
-        youtubeUrl: track.movie && track.movie !== 'null' ? track.movie : '',
-      })),
+      tracks: Array.isArray(album.tracks)
+        ? album.tracks.map(track => ({
+            title: track.strTrack || track.title || 'No title',
+            duration: track.intDuration
+              ? Math.floor(track.intDuration / 60000) +
+                ':' +
+                String(Math.floor((track.intDuration % 60000) / 1000)).padStart(
+                  2,
+                  '0'
+                )
+              : '',
+            youtubeUrl:
+              track.movie && track.movie !== 'null' ? track.movie : '',
+          }))
+        : [],
     }));
 
     renderArtistModal(artist);
@@ -187,7 +254,7 @@ async function fetchArtistAndOpenModal(id) {
     modalContent.innerHTML = '<p>Помилка завантаження даних</p>';
     console.error(error);
   } finally {
-    // loader.style.display = 'none';
+    loader.style.display = 'none';
   }
 }
 
