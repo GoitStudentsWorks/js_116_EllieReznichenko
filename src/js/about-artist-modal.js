@@ -259,7 +259,7 @@ async function fetchArtistAndOpenModal(id) {
 }
 
 // Замість .artist-list шукаємо .artists-grid (основний список артистів)
-const artistList = document.querySelector('.artists-grid');
+const artistList = document.querySelector('#artists-grid');
 if (artistList) {
   artistList.addEventListener('click', e => {
     const btn = e.target.closest('.learn-more');

@@ -23,7 +23,7 @@ body.modal-open {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background: rgba(0, 0, 0, 0.65); /* повертаємо напівпрозорий фон */
   justify-content: center;
   align-items: center;
   z-index: 1000;
