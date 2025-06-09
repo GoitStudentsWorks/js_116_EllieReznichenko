@@ -93,8 +93,6 @@
   }
 
   .footer-content {
-    margin-left: 105.5px;
-    margin-right: 105.5px;
     margin-bottom: 80px;
   }
 
@@ -108,7 +106,6 @@
   }
 
   .footer-links {
-    margin-top: 32px;
     padding-top: 32px;
     padding-bottom: 0;
     display: flex;
@@ -136,11 +133,6 @@
 }
 
 @media (min-width: 1440px) {
-  .footer-content {
-    margin-left: 336px;
-    margin-right: 336px;
-  }
-
   .footer-links-icon {
     width: 24px;
     height: 24px;
