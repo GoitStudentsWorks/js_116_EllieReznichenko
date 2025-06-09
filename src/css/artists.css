@@ -30,7 +30,7 @@
 }
 
 .artist-card {
-  
+
 }
 
 .artist-card-img {
@@ -76,6 +76,7 @@
   margin-bottom: 24px;
 }
 
+
 .artist-card-btn,
 .load-more-btn {
   font-family: 'IBM Plex Sans', sans-serif;
@@ -115,6 +116,7 @@
   background: rgb(118, 65, 145);
   max-width: fit-content;
 }
+
 
 .artist-card-btn {
   gap: 8px;
@@ -192,3 +194,4 @@
     margin: 0 auto;        
   }
 }
+

@@ -9,6 +9,7 @@ const refs = {
   loadMoreBtn: document.getElementById('load-more-btn'),
 };
 
+
 function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiographyEN }) {
   const genreTags = (genres || []).map(genre => `<span class="genre">${genre}</span>`).join('');
   const shortBio = strBiographyEN?.length > 100 ? strBiographyEN.slice(0, 100) + '...' : (strBiographyEN || '');
@@ -16,6 +17,7 @@ function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiography
   const imgSrc = strArtistThumb && typeof strArtistThumb === 'string' && strArtistThumb.trim() !== ''
     ? strArtistThumb
     : '/img/artists/Placeholder_Image.jpg';
+
 
   return `
     <li class="artist-card" data-id="${_id}">
@@ -32,6 +34,7 @@ function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiography
     </li>
   `;
 }
+
 
 let page = 1;
 
@@ -65,4 +68,5 @@ refs.loadMoreBtn.addEventListener('click', renderArtistsChunk);
 // Початкове завантаження артистів
 document.addEventListener('DOMContentLoaded', () => {
   renderArtistsChunk();
+
 });
