@@ -1,134 +1,104 @@
-.artists-container {
+.artists-section {
   padding-top: 64px;
   padding-bottom: 64px;
 }
 
-
-/* Головний заголовок */
-.main-title {
-margin-bottom: 16px;
-color: rgb(255, 255, 255);
-font-family: IBM Plex Sans;
-font-size: 16px;
-font-weight: 600;
-line-height: 24px;
-text-align: left;  
-}
-
-/* Підзаголовок */
-.subtitle {
-margin-bottom: 32px;
-color: rgb(255, 255, 255);
-font-family: 'Epilogue', sans-serif;
-font-size: 44px;
-font-weight: 700;
-line-height: 52.8px;       /* 120% від 44px */
-letter-spacing: -0.01em;   /* -0.44px / 44px */
-text-align: left;
-}
-
-.icon{
-  fill: #ffffff;
-}
-
-/* Карточка артиста */
-.artist-card {
-  .artist-card {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-}
-}
-
-/* Зображення артиста */
-.artist-card img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 24px;
-}
-
-/* Жанри */
-.genres {
-display: flex;
-flex-wrap: wrap;
-gap: 16px;
-}
-
-.genre {
-  display: inline-block;
-  flex-wrap: wrap;
-  padding: 4px 10px 4px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 16px;
+.artists-section-title {
   font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.artists-section-subtitle {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Ім’я артиста */
-.artist-name {
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: flex-start;
-margin: 16px 0px 8px 0px;
-color: rgb(255, 255, 255);
-font-family: "Epilogue", sans-serif;
-font-size: 32px;
-font-weight: 700;
-line-height: 1.3; /* 130% = 1.3 */
-letter-spacing: -0.01em; /* -1% = -0.01em */
-text-align: left;
-
-
-}
-
-/* Опис */
-.description {
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-align-items: flex-start;
-color: rgb(255, 255, 255);
-font-size: 18px;
-line-height: 1.5;         /* 150% = 1.5 */
-text-align: left;
-margin-bottom: 24px;
-}
-
-/* Посилання */
-.learn-more {
-display: inline-flex;
-  align-items: center; 
-  gap: 8px; 
-  color: rgb(255, 255, 255);
-  background-color: transparent;
-  border: none;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.5;
-  text-align: left;
-  margin-bottom: 64px;
-}
-
-.last-learn {
+  min-width: 288px;
+  height: 159px;
   margin-bottom: 32px;
 }
 
-
-/* Кнопка "Load More" */
-.load-more {
+.artists-list {
   display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.artist-card {
+
+}
+
+.artist-card-img {
+  border-radius: 16px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: 177px;
+  object-fit: cover;
+  margin-bottom: 24px;
+}
+
+.artist-card-genres li {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: transparent;
+}
+
+.artist-card-genres {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+}
+
+.artist-card-name {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.artist-card-info {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+
+.artist-card-btn,
+.load-more-btn {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #fff;
+  border-radius: 12px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12;
-  padding: 10px 24px 10px 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.load-more-btn {
+  display: flex;
+  align-items: center;     /* вирівнювання тексту і стрілки по вертикалі */
+  justify-content: center;
+  gap: 12px;               /* поправлено gap з 12 на 12px */
+  padding: 10px 24px;
   min-width: 288px;
   border: none;
   color: #fff;
@@ -137,71 +107,91 @@ display: inline-flex;
   font-weight: 500;
   cursor: pointer;
   border-radius: 12px;
-  box-shadow: 0px 1px 2px 0px rgba(6, 3, 7, 0.05),inset 0px -2px 1px 0px rgba(0, 0, 0, 0.2),inset 0px 0px 0px 1px rgba(6, 3, 7, 0.15),inset 0px 2px 1px 0px rgba(255, 255, 255, 0.25),inset 0px 32px 24px 0px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0px 1px 2px 0px rgba(6, 3, 7, 0.05),
+    inset 0px -2px 1px 0px rgba(0, 0, 0, 0.2),
+    inset 0px 0px 0px 1px rgba(6, 3, 7, 0.15),
+    inset 0px 2px 1px 0px rgba(255, 255, 255, 0.25),
+    inset 0px 32px 24px 0px rgba(255, 255, 255, 0.05);
   background: rgb(118, 65, 145);
   max-width: fit-content;
 }
 
-.load-more:hover {
-  background: linear-gradient(90deg, #b456d6, #925cd2);
-  transform: translateY(-2px);
+
+.artist-card-btn {
+  gap: 8px;
+  text-align: left;
+  padding: 0;
 }
 
-.learn-more .icon {
-  fill: #ffffff;    
+.load-more-btn-icon {
+  fill: #ffffff;
+  display: inline-block;
+  vertical-align: middle;
+  /* Якщо потрібно — додай margin-bottom: 2px; для точного вирівнювання */
 }
 
-.artists-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+.artist-card-icon {
+  fill: #ffffff;
 }
 
 @media screen and (min-width: 768px) {
-  .subtitle {
-  margin-bottom: 24px;
-  }
-
-  .artists-grid {
-    grid-template-columns: 1fr; /* одна картка в ряд */
-  }
-  
-  .description{
+  .artists-section-subtitle {
     width: 704px;
-    height: 54px;
-  }
-  .learn-more {
-    margin-bottom: 32px;
-  }
-  .learn-more:last-of-type {
-  margin-bottom: 64px; /* для останнього */
-}
-.load-more {
-margin: 0 auto;
-min-width: 340px;
-
-}
-}
-
-@media screen and (min-width: 1440px) {
-  .subtitle {
-   margin-bottom: 80px;
-   width: 523px;
-   height: 144px;  
+    height: 106px;
   }
 
-  .artists-grid {
-    grid-template-columns: repeat(2, 1fr); /* Дві картки в рядок */
-    gap: 32px; 
+  .artists-list {
+    gap: 32px;
+  }
+
+  .artists-list-item {
+    width: 100%;
   }
 
   .artist-card {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .artist-card-img {
+    height: 393px;
+  }
+
+  .load-more-btn {
+    margin: 0 auto;
+    min-width: 340px;
+  }
 }
 
-.load-more {
-margin: 0 auto;
-min-width: 170px;
+@media screen and (min-width: 1440px) {
+  .artists-section {
+    padding-top: 112px;
+    padding-bottom: 112px;
+  }
+
+  .artists-section-subtitle {
+    font-size: 60px;
+    max-width: 863px;
+    height: 144px;
+    margin-bottom: 80px;
+  }
+
+  .artists-list {
+    justify-content: flex-start;
+  }
+
+  .artist-card {
+    flex-basis: calc((100% - 32px) / 2);
+  }
+
+  .artist-card-img {
+    height: 393px;
+  }
+
+  .load-more-btn {
+    width: 170px;          
+    margin: 0 auto;        
+  }
 }
-}
+

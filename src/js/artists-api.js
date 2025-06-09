@@ -1,4 +1,5 @@
 
+
 export const API_BASE = 'https://sound-wave.b.goit.study/api';
 
 export let currentPage = 1;
@@ -64,5 +65,18 @@ export async function fetchFeedbacks() {
     return [];
   }
 }
+
+export async function fetchArtistsAlbumsById(artistId) {
+  const res = await fetch(`${API_BASE}/artists/${artistId}/albums`);
+  if (!res.ok) throw new Error('Не вдалося завантажити альбоми артиста');
+  return await res.json();
+}
+
+
+
+
+
+
+
 
 
