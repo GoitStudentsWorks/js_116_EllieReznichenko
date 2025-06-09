@@ -33,6 +33,11 @@ text-align: left;
 
 /* Карточка артиста */
 .artist-card {
+  .artist-card {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
 }
 
 /* Зображення артиста */
@@ -103,7 +108,8 @@ display: inline-flex;
   align-items: center; 
   gap: 8px; 
   color: rgb(255, 255, 255);
-  background-color: black;
+  background-color: transparent;
+  border: none;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.5;
@@ -117,20 +123,28 @@ display: inline-flex;
 
 
 /* Кнопка "Load More" */
-.load-more-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  gap: 12px; 
-  margin-bottom: 32px;
+.load-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12;
+  padding: 10px 24px 10px 24px;
+  min-width: 288px;
   border: none;
   color: #fff;
-  font-size: 16px;
-  font-weight: bold;
+  flex: none;
+  font-size: 18px;
+  font-weight: 500;
   cursor: pointer;
   border-radius: 12px;
   box-shadow: 0px 1px 2px 0px rgba(6, 3, 7, 0.05),inset 0px -2px 1px 0px rgba(0, 0, 0, 0.2),inset 0px 0px 0px 1px rgba(6, 3, 7, 0.15),inset 0px 2px 1px 0px rgba(255, 255, 255, 0.25),inset 0px 32px 24px 0px rgba(255, 255, 255, 0.05);
   background: rgb(118, 65, 145);
+  max-width: fit-content;
+}
+
+.load-more:hover {
+  background: linear-gradient(90deg, #b456d6, #925cd2);
+  transform: translateY(-2px);
 }
 
 .learn-more .icon {
@@ -140,4 +154,54 @@ display: inline-flex;
 .artists-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+@media screen and (min-width: 768px) {
+  .subtitle {
+  margin-bottom: 24px;
+  }
+
+  .artists-grid {
+    grid-template-columns: 1fr; /* одна картка в ряд */
+  }
+  
+  .description{
+    width: 704px;
+    height: 54px;
+  }
+  .learn-more {
+    margin-bottom: 32px;
+  }
+  .learn-more:last-of-type {
+  margin-bottom: 64px; /* для останнього */
+}
+.load-more {
+margin: 0 auto;
+min-width: 340px;
+
+}
+}
+
+@media screen and (min-width: 1440px) {
+  .subtitle {
+   margin-bottom: 80px;
+   width: 523px;
+   height: 144px;  
+  }
+
+  .artists-grid {
+    grid-template-columns: repeat(2, 1fr); /* Дві картки в рядок */
+    gap: 32px; 
+  }
+
+  .artist-card {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.load-more {
+margin: 0 auto;
+min-width: 170px;
+}
 }
