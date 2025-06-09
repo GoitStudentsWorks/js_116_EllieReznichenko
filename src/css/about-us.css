@@ -1,0 +1,107 @@
+/*-------------MOBILE---------------------*/
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  .container-about-us {
+    padding-bottom: 64px;
+    padding-top: 64px;
+  }
+  .about-us {
+    fill: white;
+  }
+
+  .photo-aboutUs {
+    border-radius: 16px;
+  }
+
+  .photo-aboutUs {
+    background-color: transparent;
+  }
+  .aboutUs-list-text {
+    margin-top: 48px;
+  }
+
+  .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 44px;
+    color: #ffffff;
+  }
+  .aboutUs-text {
+    font-size: 18px;
+    color: #ffffff;
+  }
+}
+
+/*--------------------------TABLET-------------*/
+@media screen and (min-width: 768px) {
+  .container-about-us {
+    padding-bottom: 64px;
+    padding-top: 64px;
+  }
+  .about-us {
+    fill: white;
+  }
+
+  .photo-aboutUs {
+    width: 704px;
+    height: 413px;
+  }
+  .aboutUs-list-text {
+    margin-top: 24px;
+  }
+
+  .aboutUs-svg {
+    width: 80px;
+    height: 80px;
+  }
+  .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-weight: 700;
+    font-size: 44px;
+    color: #ffffff;
+  }
+  .aboutUs-text {
+    font-size: 20px;
+  }
+}
+
+/*--------------------------PK---------------------*/
+
+@media screen and (min-width: 1440px) {
+  .flex-container {
+    width: 1312px;
+    height: 664px;
+    display: flex;
+    align-items: center;
+  }
+
+  .container-about-us {
+    padding-bottom: 112px;
+    padding-top: 112px;
+  }
+
+  .photo-aboutUs {
+    width: 640px;
+    height: 664px;
+  }
+  .aboutUs-list-text {
+    padding-left: 32px;
+    margin-top: 0px;
+  }
+
+  .aboutUs-artistsHub {
+    font-family: 'Epilogue', sans-serif;
+    letter-spacing: 0.001em;
+  }
+  .aboutUs-text {
+    width: 640px;
+
+    padding-bottom: 0;
+  }
+  .image-wrapper {
+    margin-right: 20px;
+  }
+}

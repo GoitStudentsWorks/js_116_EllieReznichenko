@@ -1,45 +1,56 @@
-
 /* ======== Header ======== */
 header {
-  display: block;
-  width: 100%;
+  background-color: black;
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 1000;
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 18px;
-  line-height: 150%;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 18px;
+    line-height: 150%;
 }
 
-@media (min-width: 768px) {
-  header {
-    padding: 10.5px 0;
-    top: 0 32px;
-  }
+
+@media screen and (min-width: 768px) {
+    .nav-link {
+        padding: 12px 0;
+      }
+        .nav {
+        margin: 0 auto;
+        max-width: 640px;
+        height: 51px;
+        }
 }
 
 .header-container {
-  width: 640px;
-  padding: 6.5px 12px 6.5px 20px;
+  height: 68px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .header-container {
-  width: 640px;
-  padding: 0;
+  max-width: 768px;
+  height: 72px;
 }
-}
-@media (min-width: 1440px) {
-  .header-container {
-      width: 1312px;
-      height: 51px;
-    }
-}
+  }
 
+@media screen and (min-width: 1440px) {
+  .header-container {
+    max-width: 1440px;
+    }
+    .nav {
+    max-width: 1440px;
+    }  
+}
 
 .svg {
   fill: #ffffff;
@@ -63,22 +74,20 @@ header {
   .logo-header {
     fill: #ffffff;
   }
-    .logo-header:hover,
-    .logo-header:focus {
-      fill: #764191;
-    }
-  
-    .logo-header:active {
-      fill: #988aa0;
-    }
-}
+  .logo-header:hover,
+  .logo-header:focus {
+    fill: #764191;
+  }
 
+  .logo-header:active {
+    fill: #988aa0;
+  }
+}
 
 .icon-logo {
   width: 119px;
   height: 51px;
 }
-
 
 /* ======== Navigation ======== */
 .nav-list {
@@ -134,11 +143,14 @@ header {
     display: none;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
 section {
   scroll-margin-top: 64px;
 }
 @media (min-width: 768px) {
   section {
-      scroll-margin-top: 72px;
-    }
+    scroll-margin-top: 72px;
+  }
 }

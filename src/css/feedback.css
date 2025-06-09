@@ -1,5 +1,105 @@
-.rating.large .star {
-  color: #764191 !important;
-  z-index: 100;
-  fill: #764191;
+.container_feedback {
+  padding-block: 64px !important;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.feedback-stars {
+  color: #a47cf3;
+  font-size: 20px;
+}
+
+.feedback_description {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: white;
+  margin-block: 32px !important;
+  margin: 0 auto;
+}
+
+.feedback_name {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  color: white;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 16px;
+}
+
+.swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 0.4 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: white !important;
+  opacity: 1 !important;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .feedback_description {
+    font-size: 26px;
+    max-width: 518px !important;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: block !important;
+  }
+
+  :root {
+    --swiper-navigation-size: none !important;
+  }
+
+  .swiper-button-prev svg,
+  .swiper-button-next svg {
+    width: 48px !important;
+    height: 48px !important;
+    fill: white !important;
+    stroke: white !important;
+    color: transparent !important;
+    display: block !important;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .feedback_description {
+    font-size: 32px;
+    line-height: 130%;
+    max-width: 886px;
+  }
+
+  .swiper-pagination {
+    margin-top: 75px;
+  }
 }
