@@ -1,9 +1,7 @@
 import {
   fetchArtists,
   fetchArtistById,
-  fetchArtistsAlbumsById,
-} from './artists-api.jsjs';
-import { openArtistModal } from './about-artist-modal.js';
+} from './artists-api.js';
 import { renderArtists } from './render-functions.js';
 import { refs } from './refs.js';
 
