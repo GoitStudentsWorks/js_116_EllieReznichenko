@@ -146,16 +146,11 @@ header {
 html {
   scroll-behavior: smooth;
 }
-/* section {
+section {
   scroll-margin-top: 64px;
 }
 @media (min-width: 768px) {
   section {
     scroll-margin-top: 72px;
-  }
-} */
-@media (min-width: 768px) {
-  section {
-    scroll-margin-top: 40px;
   }
 }
