@@ -1,0 +1,303 @@
+body.modal-open {
+  overflow: hidden;
+}
+
+.artist-list {
+  margin-bottom: 20px;
+}
+
+.artist-card {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  width: 200px;
+}
+
+/* Модалка на весь екран */
+.modal {
+  font-family: 'IBM Plex Sans', sans-serif;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65); /* повертаємо напівпрозорий фон */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: background 0.3s;
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+.modal-content {
+  background: #060307;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 32px 20px 24px 20px;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+  font-family: 'IBM Plex Sans', Arial, sans-serif;
+  letter-spacing: 0.01em;
+  animation: modalIn 0.25s cubic-bezier(0.4, 2, 0.6, 1) 1;
+}
+
+@keyframes modalIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.button-close {
+  position: static;
+  margin-left: auto;
+  top: auto;
+  right: auto;
+  cursor: pointer;
+  padding: 6px 14px;
+  background: #181818;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s;
+  z-index: 2;
+}
+.button-close:hover {
+  background: #2f2d2d;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.artist-mod-title {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 130%;
+  text-align: left;
+  margin-bottom: 0;
+  letter-spacing: -0.01em;
+}
+
+.artist-main-info {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+@media (max-width: 900px) {
+  .artist-main-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+}
+.artist-image {
+  flex-shrink: 0;
+  width: 320px;
+  height: 196px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 0;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  display: block;
+}
+@media (max-width: 900px) {
+  .artist-image {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+.artist-info {
+  flex: 1 1 0%;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+.genres strong {
+  margin-right: 8px;
+  font-weight: 600;
+  color: #fff;
+}
+.modal-content .genre {
+  display: inline-block;
+  background: #fff;
+  color: #181818;
+  border-radius: 6px;
+  padding: 2px 10px;
+  margin: 0 6px 4px 0;
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border: 1px solid #eee;
+}
+.biography {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.biography::-webkit-scrollbar {
+  width: 6px;
+}
+.biography::-webkit-scrollbar-thumb {
+  background: #232526;
+  border-radius: 8px;
+}
+.biography::-webkit-scrollbar-track {
+  background: transparent;
+}
+.albums {
+  margin-top: 28px;
+}
+.albums-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 600px) {
+  .albums-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .albums-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.album {
+  margin-bottom: 0;
+  background: #232526;
+  border-radius: 10px;
+  padding: 14px 12px 10px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.album h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  color: #fff;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  background: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+}
+th,
+td {
+  border: 1px solid #444;
+  padding: 7px 8px;
+  text-align: left;
+  font-size: 1rem;
+}
+th {
+  background: #232526;
+  color: white;
+  font-weight: 600;
+}
+tr:nth-child(even) td {
+  background: #202124;
+}
+tr:nth-child(odd) td {
+  background: #181818;
+}
+
+/* Scrollbar styles for modal */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: #232526;
+  border-radius: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 8px 0 8px 0;
+    font-size: 0.98rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .modal-content {
+    padding: 40px 40px 32px 40px;
+  }
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+.loader::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 56px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  border-top: 6px solid #764191;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

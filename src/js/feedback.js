@@ -1,4 +1,5 @@
-import axios from 'axios';
+import starFilled from '/img/feedback//star-filled.png';
+import starEmpty from '/img/feedback/star-empty.png';
 
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -6,9 +7,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import 'css-star-rating/css/star-rating.min.css';
+import Raty from 'raty-js';
 
-// Округлення
+import { fetchFeedbacks } from './artists-api';
+
 function roundRating(rating) {
   return Math.round(rating);
 }
@@ -21,13 +23,13 @@ function processFeedbacks(rawFeedbacks) {
   }));
 }
 
-// Отримання випадкових відгуків (на фронті, бо бек не підтримує limit/sort)
-export const getRandomFeedbacks = async (count = 3) => {
+console.log(roundRating);
+
+// Отримання випадкових відгуків
+
+const getRandomFeedbacks = async (count = 3) => {
   try {
-    const response = await axios.get(
-      'https://sound-wave.b.goit.study/api/feedbacks'
-    );
-    const all = response.data.data;
+    const all = await fetchFeedbacks();
 
     const random = [];
     const used = new Set();
@@ -47,89 +49,70 @@ export const getRandomFeedbacks = async (count = 3) => {
   }
 };
 
-// Налаштування Swiper
+// Основна логіка
 document.addEventListener('DOMContentLoaded', () => {
-  new Swiper('.swiper', {
-    direction: 'horizontal',
-    loop: false,
-    modules: [Navigation, Pagination],
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-    simulateTouch: true,
-    grabCursor: true,
-    keyboard: {
-      enabled: true,
-      pageUpDown: true,
-      onlyInViewport: true,
-    },
-    mousewheel: {
-      eventsTarget: '.swiper',
-    },
-  });
-});
+  (async () => {
+    try {
+      const rawFeedbacks = await getRandomFeedbacks(3);
+      const feedbacks = processFeedbacks(rawFeedbacks);
 
-// Генерація слайдів з даних
-(async () => {
-  try {
-    const rawFeedbacks = await getRandomFeedbacks(3);
-    console.log('RAW:', rawFeedbacks);
-    const feedbacks = processFeedbacks(rawFeedbacks);
+      const wrapper = document.querySelector('.swiper-wrapper');
+      wrapper.innerHTML = '';
 
-    const wrapper = document.querySelector('.swiper-wrapper');
-    wrapper.innerHTML = '';
-    feedbacks.forEach(fb => {
-      const { name, descr, rating } = fb;
+      feedbacks.forEach((fb, index) => {
+        const { name, descr, roundedRating } = fb;
 
-      const slide = document.createElement('div');
-      slide.className = 'swiper-slide';
-      slide.innerHTML = `
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `
           <div class="feedback-card">
-            <div class="rating large star-icon direction-rtl value-${rating} half label-hidden">
-   <div class="label-value">1.5</div>
-    <div class="star-container">
-        <div class="star">
-            <i class="star-empty"></i>
-            <i class="star-half"></i>
-            <i class="star-filled"></i>
-        </div>
-        <div class="star">
-            <i class="star-empty"></i>
-            <i class="star-half"></i>
-            <i class="star-filled"></i>
-        </div>
-        <div class="star">
-            <i class="star-empty"></i>
-            <i class="star-half"></i>
-            <i class="star-filled"></i>
-        </div>
-        <div class="star">
-            <i class="star-empty"></i>
-            <i class="star-half"></i>
-            <i class="star-filled"></i>
-        </div>
-        <div class="star">
-            <i class="star-empty"></i>
-            <i class="star-half"></i>
-            <i class="star-filled"></i>
-        </div>
-    </div>
-</div>
-            <p>${descr}</p>
-            <h3>${name}</h3>
+            <div class="rating" data-score="${roundedRating}"></div>
+            <p class="feedback_description">${descr}</p>
+            <h3 class="feedback_name">${name}</h3>
           </div>
         `;
-      wrapper.appendChild(slide);
-    });
-  } catch (error) {
-    console.error('Помилка під час обробки відгуків:', error);
-  }
-})();
+        wrapper.appendChild(slide);
+      });
+
+      // Ініціалізація Swiper
+      new Swiper('.swiper', {
+        direction: 'horizontal',
+        loop: false,
+        modules: [Navigation, Pagination],
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        simulateTouch: true,
+        grabCursor: true,
+        keyboard: {
+          enabled: true,
+          pageUpDown: true,
+          onlyInViewport: true,
+        },
+        mousewheel: {
+          eventsTarget: '.swiper',
+        },
+      });
+
+      // Ініціалізація Raty для кожного відгуку
+      const ratingEls = document.querySelectorAll('.rating');
+      ratingEls.forEach(el => {
+        const score = parseInt(el.dataset.score, 10);
+        const raty = new Raty(el, {
+          starOn: starFilled,
+          starOff: starEmpty,
+          score: score,
+          readOnly: true,
+        });
+        raty.init();
+      });
+    } catch (error) {
+      console.error('Помилка під час обробки відгуків:', error);
+    }
+  })();
+});
