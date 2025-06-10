@@ -100,6 +100,7 @@ function renderArtistModal(artist) {
   const genres = genresArr.length
     ? genresArr.map(g => `<span class="genre">${g}</span>`).join(' ')
     : '<span class="genre">information missing</span>';
+
   const imageUrl = artist.imageUrl || '';
 
   const albumsHtml = artist.albums?.length
@@ -201,36 +202,15 @@ async function fetchArtistAndOpenModal(id) {
       `https://sound-wave.b.goit.study/api/artists/${id}`
     );
     const artistRaw = response.data;
-    console.log(
-      'MODAL artistRaw:',
-      artistRaw,
-      'id:',
-      artistRaw._id,
-      'name:',
-      artistRaw.strArtist || artistRaw.name
-    );
-    console.log(
-      'MODAL artistRaw.genres:',
-      artistRaw.genres,
-      'typeof:',
-      typeof artistRaw.genres
-    );
 
-    let genres = artistRaw.genres;
+    let responseGenres = await axios.get(
+      `https://sound-wave.b.goit.study/api/artists`
+    );
+    const genres =
+      responseGenres.data.artists.find(a => a._id === id)?.genres || [];
     if (!genres && typeof artistRaw.genres !== 'undefined') {
       genres = artistRaw.genres;
     }
-    console.log(
-      'MODAL genres for artist:',
-      genres,
-      'typeof:',
-      typeof genres,
-      'id:',
-      artistRaw._id,
-      'name:',
-      artistRaw.strArtist || artistRaw.name
-    );
-
     const artist = {
       name: artistRaw.strArtist || artistRaw.name || 'No name',
       imageUrl: artistRaw.strArtistThumb || artistRaw.image || '',
@@ -243,21 +223,11 @@ async function fetchArtistAndOpenModal(id) {
       membersCount: artistRaw.intMembers || artistRaw.membersCount || '',
       country: artistRaw.strCountry || artistRaw.country || '',
       biography: artistRaw.strBiographyEN || artistRaw.bio || '',
-      genres: artistRaw.genres,
+      genres: genres.join(', ') || 'information missing',
       genre: artistRaw.genre,
       tags: artistRaw.tags,
       albums: [],
     };
-    console.log(
-      'MODAL artist.genres before modal:',
-      artist.genres,
-      'typeof:',
-      typeof artist.genres,
-      'id:',
-      artistRaw._id,
-      'name:',
-      artistRaw.strArtist || artistRaw.name
-    );
 
     let albumsArray = [];
     if (artistRaw.albumsList && Array.isArray(artistRaw.albumsList)) {
