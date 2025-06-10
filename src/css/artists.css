@@ -30,6 +30,7 @@
   padding: 0;
 }
 
+
 .artist-cards {
   list-style: none;
   display: flex;
@@ -209,3 +210,10 @@
     width: 170px;
   }
 }
+
+
+
+
+
+
+
