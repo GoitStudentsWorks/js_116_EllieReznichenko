@@ -142,9 +142,10 @@ function renderArtistModal(artist) {
     <div class="modal-header">
       <h2 class="artist-mod-title">${artist.name}</h2>
       <button class="button-close" aria-label="Close">
-        <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M20.5933 2.20301C20.4794 1.78041 20.2568 1.39501 19.9477 1.08518C19.6386 0.775338 19.2537 0.551868 18.8313 0.437007C17.2653 0.00700739 11.0003 7.59651e-06 11.0003 7.59651e-06C11.0003 7.59651e-06 4.73633 -0.00699261 3.16933 0.404007C2.74725 0.524154 2.36315 0.750785 2.0539 1.06214C1.74464 1.3735 1.52062 1.75913 1.40333 2.18201C0.99033 3.74801 0.98633 6.99601 0.98633 6.99601C0.98633 6.99601 0.98233 10.26 1.39233 11.81C1.62233 12.667 2.29733 13.344 3.15533 13.575C4.73733 14.005 10.9853 14.012 10.9853 14.012C10.9853 14.012 17.2503 14.019 18.8163 13.609C19.2388 13.4943 19.6241 13.2714 19.934 12.9622C20.2439 12.653 20.4677 12.2682 20.5833 11.846C20.9973 10.281 21.0003 7.03401 21.0003 7.03401C21.0003 7.03401 21.0203 3.76901 20.5933 2.20301ZM8.99633 10.005L9.00133 4.00501L14.2083 7.01001L8.99633 10.005Z" fill="white" />
-</svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">Add commentMore actions
+          <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
       </button>
     </div>
     <div class="artist-main-info">
@@ -179,7 +180,7 @@ function renderArtistModal(artist) {
       </div>
     </div>
     <div class="albums">
-      <h3>Albums</h3>
+      <h3 class="title_album">Albums</h3>
       ${albumsHtml}
     </div>`;
 
@@ -315,7 +316,7 @@ if (artistList) {
   artistList.addEventListener('click', e => {
     const btn = e.target.closest('.learn-more');
     if (!btn) return;
-    const card = btn.closest('.artist-card');
+    const card = btn.closest('.artist-cards'); // виправлено на .artist-cards
     if (!card) return;
     const artistId = card.dataset.id;
     fetchArtistAndOpenModal(artistId);

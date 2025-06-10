@@ -216,7 +216,9 @@ body.modal-open {
     margin: 0 auto;
   }
 }
-
+.title_album {
+  margin-bottom: 16px;
+}
 .artist-info {
   flex: 1 1 0%;
   min-width: 0;
