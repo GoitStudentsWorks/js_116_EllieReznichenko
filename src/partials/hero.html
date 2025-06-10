@@ -1,1 +1,37 @@
-<section>Hero</section>
+<section class="hero">
+  <div class="container hero-container">
+    <div class="hero-container-text">
+      <h1 class="hero-title">Discover Your Next Favorite Artist Today</h1>
+      <p class="hero-text">
+        Dive into a world of music discoveries with ArtistsHub – your personal
+        guide to the boundless universe of sound. Explore, filter, and learn
+        about your favorite artists all in one place.
+      </p>
+      <button id="explore-artists" class="hero-btn">
+        Explore Artists
+        <svg class="hero-icon" width="24" height="24">
+          <use href="img/sprite.svg#icon-right-arrow-button"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="background-container">
+      <div class="column column-left" id="column-left">
+        <img class="hero-img" src="img/oliver-tree.jpg" alt="Oliver Tree" />
+        <img class="hero-img" src="img/samara-cyn.jpg" alt="Samara Cyn" />
+        <img class="hero-img" src="img/logic.jpg" alt="Logic" />
+      </div>
+      <div class="column column-right" id="column-right">
+        <img class="hero-img" src="img/ren-gill.jpg" alt="Ren Gill" />
+        <img class="hero-img" src="img/unlike-pluto.jpg" alt="Unlike Pluto" />
+        <img class="hero-img" src="img/sleepy-hallow.jpg" alt="Sleepy Hallow" />
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="module" src="/main.js"></script>
+<script>
+  document.getElementById('explore-artists').addEventListener('click', () => {
+    document.getElementById('artists').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>

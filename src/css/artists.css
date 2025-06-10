@@ -30,13 +30,13 @@
   padding: 0;
 }
 
+
 .artist-cards {
   list-style: none;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   flex-basis: 100%; 
-}
 
 .artist-card img {
   border-radius: 16px;
@@ -80,6 +80,7 @@
   line-height: 1.5;
   margin-bottom: 24px;
 }
+
 
 .learn-more {
   font-family: 'IBM Plex Sans', sans-serif;
@@ -127,6 +128,7 @@
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
 }
+
 
 .loader {
   display: flex;
@@ -206,4 +208,9 @@
   .load-more-btn {
     width: 170px;
   }
+
 }
+
+
+
+
