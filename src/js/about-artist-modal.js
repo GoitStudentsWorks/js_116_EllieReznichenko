@@ -51,19 +51,55 @@ function renderArtistModal(artist) {
   const membersCount = artist.membersCount || 'information missing';
   const country = artist.country || 'information missing';
   const biography = artist.biography || 'information missing';
-  // genres: завжди масив, навіть якщо приходить рядком або undefined
+
+  let genresRaw =
+    typeof artist.genres !== 'undefined'
+      ? artist.genres
+      : typeof artist.genre !== 'undefined'
+      ? artist.genre
+      : typeof artist.tags !== 'undefined'
+      ? artist.tags
+      : undefined;
   let genresArr = [];
-  if (Array.isArray(artist.genres)) {
-    genresArr = artist.genres.filter(Boolean);
-  } else if (typeof artist.genres === 'string') {
-    genresArr = artist.genres
+  if (Array.isArray(genresRaw)) {
+    if (
+      genresRaw.length === 1 &&
+      typeof genresRaw[0] === 'string' &&
+      genresRaw[0].includes(',')
+    ) {
+      genresArr = genresRaw[0]
+        .split(',')
+        .map(g => g.trim())
+        .filter(Boolean);
+    } else {
+      genresArr = genresRaw
+        .flatMap(g =>
+          typeof g === 'string' && g.includes(',')
+            ? g.split(',').map(s => s.trim())
+            : [typeof g === 'string' ? g.trim() : g]
+        )
+        .filter(Boolean);
+    }
+  } else if (typeof genresRaw === 'string') {
+    genresArr = genresRaw
       .split(',')
       .map(g => g.trim())
       .filter(Boolean);
   }
+  genresArr = Array.from(new Set(genresArr));
+  console.log(
+    'MODAL genresArr:',
+    genresArr,
+    'artist.genres:',
+    artist.genres,
+    'artist.genre:',
+    artist.genre,
+    'artist.tags:',
+    artist.tags
+  );
   const genres = genresArr.length
     ? genresArr.map(g => `<span class="genre">${g}</span>`).join(' ')
-    : 'information missing';
+    : '<span class="genre">information missing</span>';
   const imageUrl = artist.imageUrl || '';
 
   const albumsHtml = artist.albums?.length
@@ -78,7 +114,9 @@ function renderArtistModal(artist) {
           const tracksRows = album.tracks
             .map(track => {
               const youtubeLink = track.youtubeUrl
-                ? `<a href="${track.youtubeUrl}" target="_blank" rel="noopener noreferrer">YouTube</a>`
+                ? `<a href="${track.youtubeUrl}" class="youtube-link" target="_blank" rel="noopener noreferrer" title="Open on YouTube">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.12C19.228 3.5 12 3.5 12 3.5s-7.228 0-9.386.566A2.994 2.994 0 0 0 .502 6.186C0 8.344 0 12 0 12s0 3.656.502 5.814a2.994 2.994 0 0 0 2.112 2.12C4.772 20.5 12 20.5 12 20.5s7.228 0 9.386-.566a2.994 2.994 0 0 0 2.112-2.12C24 15.656 24 12 24 12s0-3.656-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  </a>`
                 : '';
               return `
                 <tr>
@@ -104,19 +142,36 @@ function renderArtistModal(artist) {
     <div class="modal-header">
       <h2 class="artist-mod-title">${artist.name}</h2>
       <button class="button-close" aria-label="Close">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+        <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20.5933 2.20301C20.4794 1.78041 20.2568 1.39501 19.9477 1.08518C19.6386 0.775338 19.2537 0.551868 18.8313 0.437007C17.2653 0.00700739 11.0003 7.59651e-06 11.0003 7.59651e-06C11.0003 7.59651e-06 4.73633 -0.00699261 3.16933 0.404007C2.74725 0.524154 2.36315 0.750785 2.0539 1.06214C1.74464 1.3735 1.52062 1.75913 1.40333 2.18201C0.99033 3.74801 0.98633 6.99601 0.98633 6.99601C0.98633 6.99601 0.98233 10.26 1.39233 11.81C1.62233 12.667 2.29733 13.344 3.15533 13.575C4.73733 14.005 10.9853 14.012 10.9853 14.012C10.9853 14.012 17.2503 14.019 18.8163 13.609C19.2388 13.4943 19.6241 13.2714 19.934 12.9622C20.2439 12.653 20.4677 12.2682 20.5833 11.846C20.9973 10.281 21.0003 7.03401 21.0003 7.03401C21.0003 7.03401 21.0203 3.76901 20.5933 2.20301ZM8.99633 10.005L9.00133 4.00501L14.2083 7.01001L8.99633 10.005Z" fill="white" />
+</svg>
       </button>
     </div>
     <div class="artist-main-info">
       <img class="artist-image" src="${imageUrl}" alt="${artist.name}">
       <div class="artist-info">
-        <p><strong>Years active</strong> ${yearsInfo}</p>
-        <p><strong>Sex</strong> ${gender}</p>
-        <p><strong>Members</strong> ${membersCount}</p>
-        <p><strong>Country</strong> ${country}</p>
+        <div class="artist-info-grid2">
+          <div class="info-col">
+            <div class="info-block">
+              <span class="info-label">Years active</span>
+              <span class="info-value">${yearsInfo}</span>
+            </div>
+            <div class="info-block">
+              <span class="info-label">Members</span>
+              <span class="info-value">${membersCount}</span>
+            </div>
+          </div>
+          <div class="info-col">
+            <div class="info-block">
+              <span class="info-label">Sex</span>
+              <span class="info-value">${gender}</span>
+            </div>
+            <div class="info-block">
+              <span class="info-label">Country</span>
+              <span class="info-value">${country}</span>
+            </div>
+          </div>
+        </div>
         <p class="biography"><strong>Biography</strong> ${biography}</p>
         <div class="genres">
           <strong>Genres</strong> ${genres}
@@ -137,11 +192,10 @@ function renderArtistModal(artist) {
 
 async function fetchArtistAndOpenModal(id) {
   try {
-    loader.style.display = 'block';
+    loader.style.display = 'flex';
     modalContent.innerHTML = '';
     openModal();
 
-    // Викликаємо API для артиста
     const response = await axios.get(
       `https://sound-wave.b.goit.study/api/artists/${id}`
     );
@@ -160,7 +214,7 @@ async function fetchArtistAndOpenModal(id) {
       'typeof:',
       typeof artistRaw.genres
     );
-    // Формуємо genres для artist: якщо genres є масивом або рядком, беремо його, інакше пробуємо з artistRaw.genres
+
     let genres = artistRaw.genres;
     if (!genres && typeof artistRaw.genres !== 'undefined') {
       genres = artistRaw.genres;
@@ -175,7 +229,7 @@ async function fetchArtistAndOpenModal(id) {
       'name:',
       artistRaw.strArtist || artistRaw.name
     );
-    // Якщо genres undefined, не чіпаємо (renderArtistModal покаже 'information missing')
+
     const artist = {
       name: artistRaw.strArtist || artistRaw.name || 'No name',
       imageUrl: artistRaw.strArtistThumb || artistRaw.image || '',
@@ -188,7 +242,9 @@ async function fetchArtistAndOpenModal(id) {
       membersCount: artistRaw.intMembers || artistRaw.membersCount || '',
       country: artistRaw.strCountry || artistRaw.country || '',
       biography: artistRaw.strBiographyEN || artistRaw.bio || '',
-      genres: genres,
+      genres: artistRaw.genres,
+      genre: artistRaw.genre,
+      tags: artistRaw.tags,
       albums: [],
     };
     console.log(
@@ -202,17 +258,15 @@ async function fetchArtistAndOpenModal(id) {
       artistRaw.strArtist || artistRaw.name
     );
 
-    // Якщо є albumsList, беремо його, інакше allAlbums
     let albumsArray = [];
     if (artistRaw.albumsList && Array.isArray(artistRaw.albumsList)) {
       albumsArray = artistRaw.albumsList;
     } else {
-      // Якщо API повертає allAlbums як масив або об'єкт
       const albumsRes = await axios.get(
         `https://sound-wave.b.goit.study/api/artists/${id}/albums`
       );
       const allAlbums = albumsRes.data;
-      console.log('allAlbums:', allAlbums); // Діагностика альбомів
+      console.log('allAlbums:', allAlbums);
       if (Array.isArray(allAlbums)) {
         albumsArray = allAlbums;
       } else if (allAlbums && Array.isArray(allAlbums.albums)) {
@@ -222,14 +276,12 @@ async function fetchArtistAndOpenModal(id) {
       } else if (allAlbums && Array.isArray(allAlbums.results)) {
         albumsArray = allAlbums.results;
       } else {
-        // fallback: якщо структура інша, покажемо її у консолі
         console.warn('Unknown albums structure:', allAlbums);
         albumsArray = [];
       }
     }
 
-    // Мапінг альбомів під ваш формат
-    console.log('albumsArray:', albumsArray); // Діагностика
+    console.log('albumsArray:', albumsArray);
     artist.albums = albumsArray.map(album => ({
       title: album.strAlbum || album.title || 'No title',
       tracks: Array.isArray(album.tracks)
@@ -258,7 +310,6 @@ async function fetchArtistAndOpenModal(id) {
   }
 }
 
-// Замість .artist-list шукаємо .artists-grid (основний список артистів)
 const artistList = document.querySelector('#artists-grid');
 if (artistList) {
   artistList.addEventListener('click', e => {
