@@ -24,25 +24,38 @@
 .artists-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 64px;
+  gap: 24px;
   justify-content: center;
   margin-bottom: 32px;
+  padding: 0;
 }
 
-.artist-card{
-  
+.artist-cards {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-basis: 100%; 
 }
 
-.artist-card-img {
+.artist-card img {
   border-radius: 16px;
-  width: 100%;
+  width: 100%; 
   aspect-ratio: 16 / 9;
-  height: 177px;
+  height: auto; 
   object-fit: cover;
   margin-bottom: 24px;
 }
 
-.artist-card-genres li {
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+
+.genre {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   padding: 4px 10px;
@@ -50,18 +63,10 @@
   font-size: 16px;
   line-height: 1.5;
   background-color: transparent;
+  white-space: nowrap;
 }
 
-.artist-card-genres {
-  list-style: none;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: 16px;
-}
-
-.artist-card-name {
+.artist-name {
   font-family: 'Epilogue', sans-serif;
   font-weight: 700;
   font-size: 32px;
@@ -70,13 +75,35 @@
   margin-bottom: 8px;
 }
 
-.artist-card-info {
+.description {
   font-size: 18px;
   line-height: 1.5;
   margin-bottom: 24px;
 }
 
-.artist-card-btn,
+.learn-more {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #fff;
+  border-radius: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon {
+  fill: #ffffff;
+  width: 24px; 
+  height: 24px;
+}
+
 .load-more-btn {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
@@ -84,45 +111,40 @@
   line-height: 1.5;
   color: #fff;
   border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.load-more-btn {
   display: flex;
+  gap: 12px;
   align-items: center;
   justify-content: center;
-  gap: 12;
-  padding: 10px 24px 10px 24px;
-  min-width: 288px;
+  background-color: #764191;
   border: none;
-  color: #fff;
-  flex: none;
-  font-size: 18px;
-  font-weight: 500;
   cursor: pointer;
-  border-radius: 12px;
-  box-shadow: 0px 1px 2px 0px rgba(6, 3, 7, 0.05),inset 0px -2px 1px 0px rgba(0, 0, 0, 0.2),inset 0px 0px 0px 1px rgba(6, 3, 7, 0.15),inset 0px 2px 1px 0px rgba(255, 255, 255, 0.25),inset 0px 32px 24px 0px rgba(255, 255, 255, 0.05);
-  background: rgb(118, 65, 145);
-  max-width: fit-content;
+  margin: 0 auto;
+  padding: 10px 24px;
+  width: 288px;
+  height: 47px;
+  box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
 }
 
-.artist-card-btn {
-  gap: 8px;
-  text-align: left;
-  padding: 0;
+.loader {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
 }
 
-.load-more-btn-icon {
-  fill: #ffffff;
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
 
-.artist-card-icon {
-  fill: #ffffff;
+.visually-hidden {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -132,25 +154,24 @@
   }
 
   .artists-list {
-    gap: 32px;
+    gap: 32px; 
+    justify-content: center;
   }
 
-  .artists-list-item {
+  .img{
     width: 100%;
   }
 
-  .artist-card {
+  .artist-cards {
     flex-basis: 100%;
-    max-width: 100%;
   }
 
-  .artist-card-img {
-    height: 393px;
+  .artist-card img {
+    width: 704px;
   }
 
   .load-more-btn {
-    margin: 0 auto;
-    min-width: 340px;
+    width: 340px;
   }
 }
 
@@ -168,20 +189,23 @@
   }
 
   .artists-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: flex-start;
+    gap: 32px; 
   }
 
-  .artist-card {
-    flex-basis: calc((100% - 32px) / 2);
+  .artist-cards {
+    
+    flex-basis: calc(50% - 16px);
+    
   }
 
-  .artist-card-img {
-    height: 393px;
+  .artist-card img {
+    height: auto;
   }
 
   .load-more-btn {
     width: 170px;
-    display: block;
-    margin: 0 auto; /* Центрує по горизонталі */
   }
 }
