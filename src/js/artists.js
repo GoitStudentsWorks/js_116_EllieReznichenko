@@ -20,7 +20,7 @@ function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiography
 
 
   return `
-    <li class="artist-card" data-id="${_id}">
+    <li class="artist-cards" data-id="${_id}">
       <img src="${imgSrc}" alt="${strArtist}" />
       <div class="genres">${genreTags}</div>
       <h3 class="artist-name">${strArtist}</h3>
@@ -69,4 +69,6 @@ refs.loadMoreBtn.addEventListener('click', renderArtistsChunk);
 document.addEventListener('DOMContentLoaded', () => {
   renderArtistsChunk();
 
+
 });
+

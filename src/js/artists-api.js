@@ -72,11 +72,3 @@ export async function fetchArtistsAlbumsById(artistId) {
   return await res.json();
 }
 
-
-
-
-
-
-
-
-
