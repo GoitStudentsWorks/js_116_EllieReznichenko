@@ -7,4 +7,3 @@ import './js/feedback';
 import './js/feedback-modal';
 
 import './js/mob-menu';
-

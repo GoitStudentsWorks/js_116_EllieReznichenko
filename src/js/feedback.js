@@ -23,8 +23,6 @@ function processFeedbacks(rawFeedbacks) {
   }));
 }
 
-console.log(roundRating);
-
 // Отримання випадкових відгуків
 
 const getRandomFeedbacks = async (count = 3) => {

@@ -1,5 +1,6 @@
 import starFilled from '/img/feedback/star-filled.png';
 import starEmpty from '/img/feedback/star-empty.png';
+import { sendFeedback } from '/js/artists-api';
 
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.querySelector('[data-feedback-modal]');
@@ -23,13 +24,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.add('is-hidden');
     unlockBodyScroll();
   });
-  modal?.addEventListener('click', (e) => {
+  modal?.addEventListener('click', e => {
     if (e.target === modal) {
       modal.classList.add('is-hidden');
       unlockBodyScroll();
     }
   });
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !modal.classList.contains('is-hidden')) {
       modal.classList.add('is-hidden');
       unlockBodyScroll();
@@ -58,8 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Отключаем встроенную валидацию, чтобы кастомная сработала без конфликтов
   form.setAttribute('novalidate', true);
 
-  form.addEventListener('submit', (e) => {
-    // Удаляем старые ошибки
+  form.addEventListener('submit', async e => {
+    e.preventDefault(); // зупиняємо дефолтну відправку форми
+
+    // Видаляємо старі помилки
     const inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
       input.classList.remove('input-error');
@@ -69,44 +72,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let hasError = false;
 
-    // Проверяем рейтинг
-    if (currentRating === 0) {
-      e.preventDefault();
-      alert('Пожалуйста, выберите рейтинг звёзд.');
-      hasError = true;
-    }
-
-    // Проверяем имя: не менее 2 символов
+    // Перевіряємо ім'я
     const nameInput = form.querySelector('#user-name');
     const nameValue = nameInput.value.trim();
-    if (nameValue.length < 2) {
-      e.preventDefault();
+    if (nameValue.length < 2 || nameValue.length > 16) {
       nameInput.classList.add('input-error');
-
       const errorMsg = document.createElement('div');
       errorMsg.classList.add('error-text');
-      errorMsg.textContent = 'Please enter a valid name';
+      errorMsg.textContent = 'Please enter a valid name (2-16 characters)';
       nameInput.parentElement.appendChild(errorMsg);
-
       hasError = true;
     }
 
-    // Проверяем сообщение (textarea) — не пустое
+    // Перевіряємо повідомлення
     const messageInput = form.querySelector('#user-message');
-    if (messageInput.value.trim() === '') {
-      e.preventDefault();
+    const messageValue = messageInput.value.trim();
+    if (messageValue.length < 10 || messageValue.length > 512) {
       messageInput.classList.add('input-error');
+      const errorMsg = document.createElement('div');
+      errorMsg.classList.add('error-text');
+      errorMsg.textContent = 'Please enter a message (10-512 characters)';
+      messageInput.parentElement.appendChild(errorMsg);
+      hasError = true;
+    }
+
+    // Перевіряємо рейтинг
+    const oldError = starsContainer.querySelector('.error-text');
+    if (oldError) oldError.remove();
+
+    if (currentRating === 0) {
+      starsContainer.classList.add('input-error');
 
       const errorMsg = document.createElement('div');
       errorMsg.classList.add('error-text');
-      errorMsg.textContent = 'Text error';
-      messageInput.parentElement.appendChild(errorMsg);
+      errorMsg.textContent = 'Please choose a rating';
+
+      starsContainer.appendChild(errorMsg);
 
       hasError = true;
+    } else {
+      starsContainer.classList.remove('input-error');
     }
 
     if (hasError) {
-      e.preventDefault();  // Гарантированно блокируем отправку
+      return; // є помилки — зупиняємо виконання
+    }
+
+    try {
+      await sendFeedback({
+        name: nameValue,
+        rating: currentRating,
+        descr: messageValue,
+      });
+
+      // Якщо успішно — закриваємо модалку і розблокуємо скролл
+      modal.classList.add('is-hidden');
+      unlockBodyScroll();
+
+      // Можна додати очищення форми, якщо треба
+      form.reset();
+      currentRating = 0;
+      renderStars(currentRating);
+    } catch (error) {
+      alert('Помилка при відправці фідбеку. Спробуйте пізніше.');
+      console.error(error);
     }
   });
 });
