@@ -21,7 +21,7 @@ function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiography
 
   return `
     <li class="artist-cards" data-id="${_id}">
-      <img src="${imgSrc}" alt="${strArtist}" />
+      <img class="img" src="${imgSrc}" alt="${strArtist}" />
       <div class="genres">${genreTags}</div>
       <h3 class="artist-name">${strArtist}</h3>
       <p class="description">${shortBio}</p>
@@ -71,4 +71,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
 

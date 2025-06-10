@@ -38,6 +38,7 @@
   align-items: flex-start;
   flex-basis: 100%; 
 }
+
 .artist-card img {
   border-radius: 16px;
   width: 100%; 
@@ -80,7 +81,6 @@
   line-height: 1.5;
   margin-bottom: 24px;
 }
-
 
 .learn-more {
   font-family: 'IBM Plex Sans', sans-serif;
@@ -129,7 +129,6 @@
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
 }
 
-
 .loader {
   display: flex;
   justify-content: center;
@@ -160,10 +159,12 @@
     justify-content: center;
   }
 
+  .img{
+    width: 100%;
+  }
+
   .artist-cards {
     flex-basis: 100%;
-    
-    max-width: 400px; 
   }
 
   .artist-card img {
@@ -208,8 +209,10 @@
   .load-more-btn {
     width: 170px;
   }
-
 }
+
+
+
 
 
 
