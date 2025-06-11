@@ -8,6 +8,12 @@ export function showToast(message) {
   alert(message);
 }
 
+export async function fetchHeroArtists() {
+  const res = await fetch(`${API_BASE}/artists`);
+  if (!res.ok) throw new Error('Не вдалося завантажити артистів для hero');
+  return await res.json(); // returns { artists: [...] }
+}
+
 export async function fetchArtists(page = 1, limit = 8) {
   const res = await fetch(`${API_BASE}/artists?page=${page}&limit=${limit}`);
   if (!res.ok) throw new Error('Не вдалося завантажити артистів');
@@ -33,12 +39,10 @@ export async function renderArtists() {
   } catch (error) {
     console.error(error);
     showToast('Помилка завантаження артистів. Спробуйте пізніше.');
-
   } finally {
     hideLoader();
   }
 }
-
 
 export const FEEDBACK_API = 'https://sound-wave.b.goit.study/api/feedbacks';
 
@@ -68,6 +72,4 @@ export async function sendFeedback(feedbackData) {
     console.error('Помилка при відправці фідбеку:', error);
     throw error;
   }
-
 }
-

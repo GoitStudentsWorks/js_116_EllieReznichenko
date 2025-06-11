@@ -1,23 +1,47 @@
+import { fetchHeroArtists } from './artists-api.js';
+
 const columnLeft = document.querySelector('.column-left');
 const columnRight = document.querySelector('.column-right');
 
-fetch('https://sound-wave.b.goit.study/api/artist')
-  .then(res => res.json())
-  .then(data => {
-    const artists = data;
+async function renderHeroBackground() {
+  try {
+    const data = await fetchHeroArtists();
+    const artists = data.artists;
 
-    artists.forEach((artist, index) => {
-      const img = document.createElement('img');
-      img.src = artist.photoUrl;
-      img.alt = artist.name;
+    const repeatCount = 10;
 
-      if (index % 2 === 0) {
-        columnLeft.appendChild(img.cloneNode());
-        columnLeft.appendChild(img.cloneNode());
-      } else {
-        columnRight.appendChild(img.cloneNode());
-        columnRight.appendChild(img.cloneNode());
-      }
-    });
-  })
-  .catch(error => console.error('Error loading artists:', error));
+    for (let i = 0; i < repeatCount; i++) {
+      artists.forEach((artistRaw, index) => {
+        const imageUrl =
+          artistRaw.strArtistThumb?.trim() ||
+          artistRaw.image?.trim() ||
+          artistRaw.photoUrl?.trim() ||
+          null;
+
+        if (!imageUrl) return;
+
+        const name = artistRaw.strArtist || artistRaw.name || 'Unknown Artist';
+
+        if (!imageUrl) return; // skip if no image
+
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = name;
+        img.classList.add('hero-img');
+
+        if (index % 2 === 0) {
+          columnLeft.appendChild(img.cloneNode(true));
+        } else {
+          columnRight.appendChild(img.cloneNode(true));
+        }
+      });
+    }
+
+    columnLeft.classList.add('animate-up');
+    columnRight.classList.add('animate-down');
+  } catch (error) {
+    console.error('Error loading hero artists:', error);
+  }
+}
+
+renderHeroBackground();
