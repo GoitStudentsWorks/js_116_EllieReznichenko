@@ -83,7 +83,6 @@
 }
 
 .learn-more {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 1.5;
@@ -106,7 +105,6 @@
 }
 
 .load-more-btn {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 1.5;
@@ -197,9 +195,7 @@
   }
 
   .artist-cards {
-    
     flex-basis: calc(50% - 16px);
-    
   }
 
   .artist-card img {
