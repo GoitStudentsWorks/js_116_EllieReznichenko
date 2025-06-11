@@ -38,8 +38,7 @@ body.modal-open {
   align-items: center;
 }
 
-/* Responsive modal-content */
-@media (max-width: 767.98px) {
+@media (max-width: 767px) {
   .modal-content {
     width: 320px !important;
     min-width: 320px !important;
@@ -49,7 +48,7 @@ body.modal-open {
     padding: 16px 8px;
   }
 }
-@media (min-width: 768px) and (max-width: 1439.98px) {
+@media (min-width: 768px) and (max-width: 1439px) {
   .modal-content {
     width: 768px;
     min-width: 768px;
@@ -77,7 +76,7 @@ body.modal-open {
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 767px) {
   .modal-content {
     width: 320px !important;
     min-width: 320px !important;
@@ -89,7 +88,7 @@ body.modal-open {
   }
 }
 
-@media (min-width: 768px) and (max-width: 1439.98px) {
+@media (min-width: 768px) and (max-width: 1439px) {
   .modal-content {
     width: 768px;
     min-width: 768px;
@@ -129,7 +128,7 @@ body.modal-open {
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 767px) {
   .modal-content {
     margin: 16px auto;
     max-width: calc(100vw - 32px);
@@ -143,7 +142,7 @@ body.modal-open {
   }
 }
 
-@media (min-width: 768px) and (max-width: 1439.98px) {
+@media (min-width: 768px) and (max-width: 1439px) {
   .modal-content {
     margin: 33px auto;
     max-width: calc(100vw - 66px);
@@ -371,6 +370,7 @@ body.modal-open {
   margin-right: 8px;
   font-weight: 600;
   color: #fff;
+  display: none;
 }
 .modal-content .genre {
   display: inline-block;
