@@ -22,33 +22,24 @@ export async function fetchArtistById(id) {
 
 export async function renderArtists() {
   showLoader();
-  // Показуємо індикатор завантаження
 
   try {
     const data = await fetchArtists(currentPage, limit);
-    // Чекаємо відповіді від API, отримуємо дані артистів
-
     const cardsMarkup = data.artists.map(createCard).join('');
-    // Для кожного артиста викликаємо createCard, отримуємо масив рядків HTML, об'єднуємо у єдиний рядок
-
     container.insertAdjacentHTML('beforeend', cardsMarkup);
-    // Вставляємо нові картки в кінець контейнера
-
     if (currentPage * limit >= data.total) {
       loadMoreBtn.style.display = 'none';
-      // Якщо завантажили всі артисти (поточна сторінка * ліміт >= загальна кількість), ховаємо кнопку "Load More"
     }
   } catch (error) {
     console.error(error);
     showToast('Помилка завантаження артистів. Спробуйте пізніше.');
-    // У разі помилки показуємо повідомлення
+
   } finally {
     hideLoader();
-    // При будь-якому результаті — ховаємо індикатор завантаження
   }
 }
 
-// feedback
+
 export const FEEDBACK_API = 'https://sound-wave.b.goit.study/api/feedbacks';
 
 export async function fetchFeedbacks() {
@@ -77,4 +68,6 @@ export async function sendFeedback(feedbackData) {
     console.error('Помилка при відправці фідбеку:', error);
     throw error;
   }
+
 }
+

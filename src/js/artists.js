@@ -68,3 +68,7 @@ refs.loadMoreBtn.addEventListener('click', renderArtistsChunk);
 document.addEventListener('DOMContentLoaded', () => {
   renderArtistsChunk();
 });
+
+
+
+
