@@ -3,19 +3,22 @@ const mobileMenu = document.querySelector('[data-menu]');
 const mobileCloseBtn = document.querySelector('[data-menu-close]');
 const menuLinks = document.querySelectorAll('.mob-nav-link');
 
-burgerBtn.addEventListener('click', toggleMobileMenu);
-mobileCloseBtn.addEventListener('click', toggleMobileMenu);
-
-function toggleMobileMenu() {
-  mobileMenu.classList.toggle('is-open');
+function openMobileMenu() {
+  mobileMenu.classList.add('is-open');
+  document.body.classList.add('no-scroll');
+  document.addEventListener('keydown', closeMobileMenu);
 }
 
-document.addEventListener('keydown', closeMobileMenu);
 function closeMobileMenu(e) {
-  if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
-    mobileMenu.classList.remove('is-open');
-  }
+  if (e.type === 'keydown' && e.key !== 'Escape') return;
+
+  mobileMenu.classList.remove('is-open');
+  document.body.classList.remove('no-scroll');
+  document.removeEventListener('keydown', closeMobileMenu);
 }
+
+burgerBtn.addEventListener('click', openMobileMenu);
+mobileCloseBtn.addEventListener('click', closeMobileMenu);
 
 menuLinks.forEach(link => {
   link.addEventListener('click', event => {
