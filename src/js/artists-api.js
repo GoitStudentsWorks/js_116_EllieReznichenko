@@ -48,7 +48,6 @@ export async function renderArtists() {
   }
 }
 
-// feedback
 export const FEEDBACK_API = 'https://sound-wave.b.goit.study/api/feedbacks';
 
 export async function fetchFeedbacks() {
