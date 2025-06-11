@@ -199,24 +199,6 @@ body.modal-open {
   border: white;
 }
 
-.button-close:hover,
-.button-close:focus {
-  color: #764191;
-}
-
-.button-close:active {
-  color: #988aa0;
-}
-
-.youtube-link:hover,
-.youtube-link:focus {
-  color: #ff0000;
-}
-
-.youtube-link:active {
-  color: #bd3838;
-}
-
 .modal-header {
   display: flex;
   align-items: center;
