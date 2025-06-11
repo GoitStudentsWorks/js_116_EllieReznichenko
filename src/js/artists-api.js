@@ -52,14 +52,12 @@ export async function renderArtists() {
   } catch (error) {
     console.error(error);
     showToast('Помилка завантаження артистів. Спробуйте пізніше.');
-    // У разі помилки показуємо повідомлення
   } finally {
     hideLoader();
     // При будь-якому результаті — ховаємо індикатор завантаження
   }
 }
 
-// feedback
 export const FEEDBACK_API = 'https://sound-wave.b.goit.study/api/feedbacks';
 
 export async function fetchFeedbacks() {
@@ -88,4 +86,5 @@ export async function sendFeedback(feedbackData) {
     console.error('Помилка при відправці фідбеку:', error);
     throw error;
   }
+
 }
