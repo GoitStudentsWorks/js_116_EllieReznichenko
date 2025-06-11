@@ -184,11 +184,6 @@
     justify-content: center;
   }
 
-  .img{
-    width: 100%;
-    height: 433px;
-  }
-
   .artist-cards {
     flex-basis: 100%;
   }
@@ -223,9 +218,6 @@
     grid-template-columns: 1fr 1fr;
     justify-content: flex-start;
     gap: 32px; 
-  }
-
-  .img{
   }
 
   .artist-cards {
