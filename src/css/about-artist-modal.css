@@ -2,19 +2,6 @@ body.modal-open {
   overflow: hidden;
 }
 
-.artist-list {
-  margin-bottom: 20px;
-}
-
-.artist-card {
-  cursor: pointer;
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 5px;
-  width: 200px;
-}
-
-/* Модальне вікно*/
 .modal {
   display: none;
   position: fixed;
@@ -38,11 +25,8 @@ body.modal-open {
   background: #060307;
   color: #fff;
   width: 100vw;
-  height: auto;
   max-width: 100vw;
-  max-height: none;
   overflow-y: auto;
-  padding: 8px 8px;
   border-radius: 0;
   box-shadow: none;
   position: relative;
@@ -54,7 +38,45 @@ body.modal-open {
   align-items: center;
 }
 
-/* Фіксований контейнер для модалки на мобільних */
+/* Responsive modal-content */
+@media (max-width: 767.98px) {
+  .modal-content {
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: calc(100vw - 32px) !important;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    padding: 16px 8px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1439.98px) {
+  .modal-content {
+    width: 768px;
+    min-width: 768px;
+    max-width: calc(100vw - 66px);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    padding: 40px 40px 32px 40px;
+  }
+}
+@media (min-width: 1440px) {
+  .modal-content {
+    width: 1440px;
+    min-width: 320px;
+    max-width: calc(100vw - 128px);
+    padding: 64px 64px;
+    border-radius: 24px;
+    box-shadow: 0 0 0 64px rgba(0, 0, 0, 0.25);
+  }
+}
+@media (max-width: 900px) {
+  .modal-content {
+    width: 100%;
+    max-width: 100vw;
+    min-width: 320px;
+  }
+}
+
 @media (max-width: 767.98px) {
   .modal-content {
     width: 320px !important;
@@ -67,7 +89,6 @@ body.modal-open {
   }
 }
 
-/* Фіксований контейнер для модалки на планшетах */
 @media (min-width: 768px) and (max-width: 1439.98px) {
   .modal-content {
     width: 768px;
@@ -80,7 +101,6 @@ body.modal-open {
   }
 }
 
-/* Фіксований контейнер для модалки на десктопі */
 @media (min-width: 1440px) {
   .modal-content {
     width: 1440px;
@@ -214,17 +234,15 @@ body.modal-open {
   flex-direction: row;
   gap: 32px;
   align-items: flex-start;
-  /* margin-bottom: 32px; */
 }
 @media (max-width: 768px) {
   .artist-main-info {
     flex-direction: column;
     align-items: center;
     gap: 18px;
-    /* margin-bottom: 24px; */
   }
 }
-@media (min-width: 768px) and (max-width: 1439.98px) {
+@media (min-width: 768px) and (max-width: 1438px) {
   .artist-main-info {
     flex-direction: column;
     align-items: center;
@@ -239,7 +257,6 @@ body.modal-open {
   height: 354px;
   object-fit: cover;
   border-radius: 12px;
-  margin: 0;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
   display: block;
 }
@@ -248,33 +265,26 @@ body.modal-open {
     width: 272px;
     height: 167px;
     max-width: 100%;
-    margin: 0 auto;
   }
 }
-@media (min-width: 768px) and (max-width: 1439.98px) {
+@media (min-width: 768px) and (max-width: 1438px) {
   .artist-image {
     width: 654px;
     height: 402px;
     max-width: 100%;
-    margin: 0 auto;
   }
 }
-.title_album {
-  margin-bottom: 16px;
-}
+
 .artist-info {
   flex: 1 1 0%;
   min-width: 0;
-  margin-bottom: 0;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 .artist-info-grid {
   display: flex;
   gap: 32px;
-  margin-bottom: 18px;
   flex-wrap: wrap;
 }
 .info-block {
@@ -288,7 +298,6 @@ body.modal-open {
   font-size: 18px;
   font-weight: 600;
   color: white;
-  margin-bottom: 4px;
   letter-spacing: 0.01em;
 }
 .info-value {
@@ -310,7 +319,6 @@ body.modal-open {
 .artist-info-grid2 {
   display: flex;
   gap: 48px;
-  margin-bottom: 18px;
   flex-wrap: nowrap;
 }
 .info-col {
@@ -329,7 +337,7 @@ body.modal-open {
     min-width: 0;
   }
 }
-@media (max-width: 767.98px) {
+@media (max-width: 767px) {
   .artist-info-grid2 {
     flex-direction: column;
     gap: 12px;
@@ -350,7 +358,6 @@ body.modal-open {
   }
   .artist-info-grid2 {
     align-items: flex-start;
-    margin-left: 0;
   }
 }
 
@@ -358,8 +365,6 @@ body.modal-open {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
   align-items: center;
 }
 .genres strong {
@@ -380,8 +385,6 @@ body.modal-open {
   border: 1px solid #eee;
 }
 .biography {
-  margin-top: 10px;
-  margin-bottom: 10px;
   font-size: 1.08rem;
   line-height: 1.5;
   color: #e0e0e0;
@@ -407,7 +410,6 @@ body.modal-open {
   grid-template-columns: 1fr;
   gap: 20px;
 }
-
 @media (min-width: 768px) {
   .albums-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -420,7 +422,6 @@ body.modal-open {
   }
 }
 .album {
-  margin-bottom: 0;
   background: #232526;
   border-radius: 10px;
   padding: 14px 12px 10px 12px;
@@ -462,7 +463,6 @@ tr:nth-child(odd) td {
   background: #181818;
 }
 
-/* Scrollbar*/
 .modal-content::-webkit-scrollbar {
   width: 8px;
 }
