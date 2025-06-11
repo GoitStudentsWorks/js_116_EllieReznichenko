@@ -14,7 +14,7 @@
 .hero-container {
   max-width: 320px;
   margin: 0 auto;
-  padding: 64px 16px 0;
+  padding-top: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -147,7 +147,7 @@
 
   .hero-container {
     max-width: 768px;
-    padding: 32px;
+    padding-top: 32px;
   }
   .hero-title {
     max-width: 624px;
@@ -170,6 +170,7 @@
 }
 @media screen and (min-width: 1440px) {
   .hero-container {
+    padding-top: 0;
     max-width: 1440px;
     flex-direction: row;
   }
