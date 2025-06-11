@@ -1,4 +1,5 @@
 import { fetchArtists, limit, showToast } from './artists-api.js';
+import spriteUrl from '/img/sprite.svg?url';
 
 const refs = {
   artistCardsContainer: document.querySelector('#artists-grid'),
@@ -36,7 +37,7 @@ function createArtistCard({
       <button class="learn-more" data-id="${_id}">
         Learn More
         <svg class="icon" width="24" height="24">
-          <use href="/img/sprite.svg#icon-caret-right-learn-more"></use>
+          <use href="${spriteUrl}#icon-caret-right-learn-more"></use>
         </svg>
       </button>
     </li>
