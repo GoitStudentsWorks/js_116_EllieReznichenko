@@ -24,8 +24,7 @@
 .artists-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 0;
+  gap: 64px;
 }
 
 
@@ -87,7 +86,6 @@
   color: #fff;
   display: flex;
   gap: 8px;
-  margin-bottom: 64px;
   align-items: center;
   justify-content: flex-start;
   background-color: transparent;
@@ -97,7 +95,7 @@
 }
 
 
-.artist-cards:last-child .learn-more {
+.artist-cards:last-child {
   margin-bottom: 32px;
 }
 .learn-more:hover,
@@ -238,6 +236,10 @@
     flex-basis: calc(50% - 16px);
   }
 
+  .artist-cards:last-child {
+  margin-bottom: 64px;
+}
+
   .artist-card img {
     height: auto;
   }
@@ -246,10 +248,3 @@
     width: 170px;
   }
 }
-
-
-
-
-
-
-
