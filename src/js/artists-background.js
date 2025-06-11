@@ -1,7 +1,7 @@
 const columnLeft = document.querySelector('.column-left');
 const columnRight = document.querySelector('.column-right');
 
-fetch('https://sound-wave.b.goit.study/api/artist')
+fetch('https://sound-wave.b.goit.study/api/artists') 
   .then(res => res.json())
   .then(data => {
     const artists = data;
