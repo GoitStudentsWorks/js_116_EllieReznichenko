@@ -36,6 +36,7 @@
     }
 }
 .feedback-modal-title {
+    font-family: 'Epilogue', sans-serif;
     font-weight: 700;
     font-size: 24px;
     line-height: 130%;
@@ -46,7 +47,7 @@
     .feedback-modal-title {
             font-size: 44px;
             line-height: 120%;
-            padding-bottom: 48px;
+            margin-bottom: 48px;
         }
 }
 @media screen and (min-width: 1440px) {
@@ -54,18 +55,16 @@
         font-size: 60px;
     }
 }
-.feedback-modal-form {
 
-}
 .feedback-modal-list {
-    padding-bottom: 32px;
+    margin-bottom: 32px;
     gap: 32px;
     display: flex;
     flex-direction: column;
 }
 @media screen and (min-width: 768px) {
     .feedback-modal-list {
-            padding-bottom: 24px;
+            margin-bottom: 24px;
             gap: 24px;
         }
 }
@@ -78,7 +77,7 @@
 .feedback-modal-label {
     color: #FFFFFF;
     display: block;
-    padding-bottom: 8px;
+    margin-bottom: 8px;
     font-weight: 400;
     font-size: 18px;
     line-height: 150%;
@@ -106,11 +105,11 @@
 .feedback-modal-stars {
     display: flex;
     gap: 6.07px;
-    padding-bottom: 32px;
+    margin-bottom: 32px;
 }
 @media screen and (min-width: 768px) {
     .feedback-modal-stars {
-            padding-bottom: 24px;
+            margin-bottom: 24px;
         }
 }
 
@@ -148,33 +147,19 @@
     }
 }
 .feedback-modal-submit:hover {
-    border: white;}
-
-/* .feedback-modal-close {
-    position: static;
-    margin-left: auto;
-    top: auto;
-    right: auto;
-    cursor: pointer;
-    padding: 6px 14px;
-    background: black;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: background 0.2s;
-    z-index: 2;
-    order: 2;
-    margin-left: 0;
-    margin-right: 0;
-    align-self: flex-end;
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+    transition: filter 0.3s, transform 0.2s;
 }
 
-.feedback-modal-close:hover {
-    border: white;
-} */
+.feedback-modal-submit:focus {
+    background: linear-gradient(135deg, #9e58c4, #763b96);
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.15),
+        0 0 4px rgba(255, 255, 255, 0.05);
+    outline: none;
+    transition: background 0.3s ease, box-shadow 0.3s;
+}
+
 
 .feedback-modal-close {
     position: absolute;
@@ -193,6 +178,14 @@
     width: 32px;
     height: 32px;
     fill: #fff;
+}
+.feedback-modal-close-icon:hover,
+.feedback-modal-close-icon:focus {
+    fill: #764191;
+}
+
+.feedback-modal-close-icon:active {
+    fill: #988aa0;
 }
 
 .is-hidden {
