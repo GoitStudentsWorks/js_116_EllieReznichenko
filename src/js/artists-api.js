@@ -56,7 +56,6 @@ export async function fetchFeedbacks() {
 export async function sendFeedback(feedbackData) {
   try {
     const response = await axios.post(FEEDBACK_API, feedbackData);
-    showToast('🎉 Дякуємо за ваш відгук!');
     return response.data;
   } catch (error) {
     console.error('Помилка при відправці фідбеку:', error);
