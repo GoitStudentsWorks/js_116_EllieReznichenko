@@ -1,3 +1,7 @@
+.no-scroll {
+  overflow: hidden;
+}
+
 .mob-menu {
   background-color: #060307;
   position: fixed;
