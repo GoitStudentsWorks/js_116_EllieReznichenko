@@ -3,7 +3,7 @@ import {
   limit,
   showToast,
 } from './artists-api.js';
-
+ import spriteUrl from '/img/sprite.svg?url';
 const refs = {
   artistCardsContainer: document.querySelector('#artists-grid'),
   loadMoreBtn: document.getElementById('load-more-btn'),
@@ -28,7 +28,7 @@ function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiography
       <button class="learn-more" data-id="${_id}">
         Learn More
         <svg class="icon" width="24" height="24">
-          <use href="/img/sprite.svg#icon-caret-right-learn-more"></use>
+          <use href="${spriteUrl}#icon-caret-right-learn-more"></use>
         </svg>
       </button>
     </li>
@@ -65,9 +65,6 @@ async function renderArtistsChunk() {
 
 refs.loadMoreBtn.addEventListener('click', renderArtistsChunk);
 
-// Початкове завантаження артистів
 document.addEventListener('DOMContentLoaded', () => {
   renderArtistsChunk();
-
-
 });

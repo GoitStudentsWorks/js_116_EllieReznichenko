@@ -1,5 +1,4 @@
-
-
+import axios from 'axios';
 export const API_BASE = 'https://sound-wave.b.goit.study/api';
 
 export let currentPage = 1;
@@ -41,7 +40,7 @@ export async function renderArtists() {
     }
   } catch (error) {
     console.error(error);
-    showToast('⚠️ Помилка завантаження артистів. Спробуйте пізніше.');
+    showToast('Помилка завантаження артистів. Спробуйте пізніше.');
     // У разі помилки показуємо повідомлення
   } finally {
     hideLoader();
@@ -49,9 +48,7 @@ export async function renderArtists() {
   }
 }
 
-
-
-
+// feedback
 export const FEEDBACK_API = 'https://sound-wave.b.goit.study/api/feedbacks';
 
 export async function fetchFeedbacks() {
@@ -70,4 +67,14 @@ export async function fetchArtistsAlbumsById(artistId) {
   const res = await fetch(`${API_BASE}/artists/${artistId}/albums`);
   if (!res.ok) throw new Error('Не вдалося завантажити альбоми артиста');
   return await res.json();
+}
+
+export async function sendFeedback(feedbackData) {
+  try {
+    const response = await axios.post(FEEDBACK_API, feedbackData);
+    return response.data;
+  } catch (error) {
+    console.error('Помилка при відправці фідбеку:', error);
+    throw error;
+  }
 }
