@@ -56,13 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderStars(0);
 
-  // Отключаем встроенную валидацию, чтобы кастомная сработала без конфликтов
   form.setAttribute('novalidate', true);
 
   form.addEventListener('submit', async e => {
-    e.preventDefault(); 
+    e.preventDefault();
 
-    // Видаляємо старі помилки
+
     const inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
       input.classList.remove('input-error');
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let hasError = false;
 
-    // Перевіряємо ім'я
     const nameInput = form.querySelector('#user-name');
     const nameValue = nameInput.value.trim();
     if (nameValue.length < 2 || nameValue.length > 16) {
@@ -84,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hasError = true;
     }
 
-    // Перевіряємо повідомлення
     const messageInput = form.querySelector('#user-message');
     const messageValue = messageInput.value.trim();
     if (messageValue.length < 10 || messageValue.length > 512) {
@@ -96,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hasError = true;
     }
 
-    // Перевіряємо рейтинг
     const oldError = starsContainer.querySelector('.error-text');
     if (oldError) oldError.remove();
 
@@ -125,11 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
         descr: messageValue,
       });
 
-      // Якщо успішно — закриваємо модалку і розблокуємо скролл
       modal.classList.add('is-hidden');
       unlockBodyScroll();
 
-      // Можна додати очищення форми, якщо треба
       form.reset();
       currentRating = 0;
       renderStars(currentRating);
