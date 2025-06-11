@@ -1,4 +1,5 @@
-import axios from 'axios';
+import starFilled from '/img/feedback//star-filled.png';
+import starEmpty from '/img/feedback/star-empty.png';
 
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -7,7 +8,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import Raty from 'raty-js';
-
 
 import { fetchFeedbacks } from './artists-api';
 
@@ -22,8 +22,6 @@ function processFeedbacks(rawFeedbacks) {
     roundedRating: roundRating(fb.rating),
   }));
 }
-
-console.log(roundRating);
 
 // Отримання випадкових відгуків
 
@@ -104,8 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ratingEls.forEach(el => {
         const score = parseInt(el.dataset.score, 10);
         const raty = new Raty(el, {
-          starOn: '/img/feedback/star-filled.png',
-          starOff: '/img/feedback/star-empty.png',
+          starOn: starFilled,
+          starOff: starEmpty,
           score: score,
           readOnly: true,
         });
