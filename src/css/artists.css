@@ -169,9 +169,13 @@
 }
 
 .img{
+  width: 288px;
+  height: 177px;
+  object-fit: cover;
   border-radius: 16px;
-  width: 100%;
 }
+
+
 
 @media screen and (min-width: 768px) {
   .artists-section-subtitle {
@@ -182,6 +186,11 @@
   .artists-list {
     gap: 32px; 
     justify-content: center;
+  }
+
+  .img {
+    width: 704px;
+    height: 432px;
   }
 
   .artist-cards {
@@ -211,6 +220,11 @@
     max-width: 563px;
     height: 144px;
     margin-bottom: 80px;
+  }
+
+  .img {
+    width: 640px;
+    height: 393px;
   }
 
   .artists-list {
