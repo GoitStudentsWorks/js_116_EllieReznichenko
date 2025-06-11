@@ -3,6 +3,11 @@
     padding-bottom: 64px;
     padding-top: 64px;
   }
+  .container {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   .about-us {
     fill: white;
   }
@@ -24,11 +29,16 @@
     margin-bottom: 20px;
     font-weight: 700;
     font-size: 44px;
+    line-height: 1.2;
     color: #ffffff;
   }
   .aboutUs-text {
     font-size: 18px;
+    line-height: 1.5;
     color: #ffffff;
+  }
+  .aboutUs-svg {
+    fill: white;
   }
 }
 
@@ -68,10 +78,11 @@
 
 @media screen and (min-width: 1440px) {
   .flex-container {
-    width: 1312px;
     height: 664px;
     display: flex;
     align-items: center;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .container-about-us {
@@ -84,7 +95,7 @@
     height: 664px;
   }
   .aboutUs-list-text {
-    padding-left: 32px;
+    margin-left: 32px;
     margin-top: 0px;
   }
 
@@ -94,6 +105,7 @@
   }
   .aboutUs-text {
     width: 640px;
+    line-height: 1.5;
 
     padding-bottom: 0;
   }
