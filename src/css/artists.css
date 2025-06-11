@@ -24,9 +24,7 @@
 .artists-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
   justify-content: center;
-  margin-bottom: 32px;
   padding: 0;
 }
 
@@ -51,7 +49,7 @@
 .genres {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
   margin-bottom: 16px;
   margin-top: 24px;
 }
@@ -87,15 +85,19 @@
   font-size: 18px;
   line-height: 1.5;
   color: #fff;
-  border-radius: 12px;
   display: flex;
   gap: 8px;
+  margin-bottom: 64px;
   align-items: center;
   justify-content: flex-start;
   background-color: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
+}
+
+.artist-cards:last-child .learn-more {
+  margin-bottom: 32px;
 }
 
 .icon {
@@ -110,7 +112,7 @@
   line-height: 1.5;
   color: #fff;
   border-radius: 12px;
-  display: flex;
+  display: flex !important;
   gap: 12px;
   align-items: center;
   justify-content: center;
@@ -130,7 +132,6 @@
 .loader {
   display: flex;
   justify-content: center;
-  margin: 20px auto;
 }
 
 .loader-spinner {
@@ -146,6 +147,12 @@
   display: none;
 }
 
+.img{
+  border-radius: 16px;
+  width: 100%;
+  height: 177px;
+}
+
 @media screen and (min-width: 768px) {
   .artists-section-subtitle {
     width: 704px;
@@ -159,6 +166,7 @@
 
   .img{
     width: 100%;
+    height: 433px;
   }
 
   .artist-cards {
@@ -172,6 +180,9 @@
   .load-more-btn {
     width: 340px;
   }
+  .learn-more{
+    margin-bottom: 32px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -182,7 +193,7 @@
 
   .artists-section-subtitle {
     font-size: 60px;
-    max-width: 863px;
+    max-width: 563px;
     height: 144px;
     margin-bottom: 80px;
   }
@@ -192,6 +203,10 @@
     grid-template-columns: 1fr 1fr;
     justify-content: flex-start;
     gap: 32px; 
+  }
+
+  .img{
+    height: 393px;
   }
 
   .artist-cards {
