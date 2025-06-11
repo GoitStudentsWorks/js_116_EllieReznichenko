@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
+
     const inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
       input.classList.remove('input-error');

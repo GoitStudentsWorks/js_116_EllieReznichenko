@@ -3,10 +3,6 @@ import axios from 'axios';
 const modal = document.querySelector('.modal');
 const modalContent = modal.querySelector('.modal-content');
 const loader = document.querySelector('.loader');
-if (!loader) {
-  console.warn('Loader element not found in DOM!');
-}
-
 let youtubeListeners = [];
 
 function openModal() {
@@ -29,15 +25,76 @@ function removeYoutubeListeners() {
 }
 
 function addYoutubeListeners() {
-  const buttons = modalContent.querySelectorAll('.youtube-btn');
-  buttons.forEach(button => {
-    const handler = () => {
-      const url = button.dataset.youtube;
-      if (url) window.open(url, '_blank');
+  modalContent.querySelectorAll('.youtube-link').forEach(link => {
+    const handler = e => {
+      e.preventDefault();
+      window.open(link.href, '_blank');
     };
-    button.addEventListener('click', handler);
-    youtubeListeners.push({ element: button, handler });
+    link.addEventListener('click', handler);
+    youtubeListeners.push({ element: link, handler });
   });
+}
+
+function getGenres(artist) {
+  let genresRaw = artist.genres ?? artist.genre ?? artist.tags;
+  if (!genresRaw) return ['information missing'];
+  return Array.from(
+    new Set(
+      (Array.isArray(genresRaw) ? genresRaw : [genresRaw])
+        .flatMap(g => g.split(','))
+        .map(g => g.trim())
+        .filter(Boolean)
+    )
+  );
+}
+
+function renderGenres(genresArr) {
+  return genresArr[0] === 'information missing'
+    ? '<span class="genre">information missing</span>'
+    : genresArr.map(g => `<span class="genre">${g}</span>`).join(' ');
+}
+
+function renderTracks(tracks) {
+  return tracks
+    .map(
+      track => `
+      <tr>
+        <td>${track.title}</td>
+        <td>${track.duration}</td>
+        <td>${
+          track.youtubeUrl
+            ? `<a href="${track.youtubeUrl}" class="youtube-link" target="_blank" rel="noopener noreferrer" title="Open on YouTube">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.12C19.228 3.5 12 3.5 12 3.5s-7.228 0-9.386.566A2.994 2.994 0 0 0 .502 6.186C0 8.344 0 12 0 12s0 3.656.502 5.814a2.994 2.994 0 0 0 2.112 2.12C4.772 20.5 12 20.5 12 20.5s7.228 0 9.386-.566a2.994 2.994 0 0 0 2.112-2.12C24 15.656 24 12 24 12s0-3.656-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>`
+            : ''
+        }</td>
+      </tr>`
+    )
+    .join('');
+}
+
+function renderAlbums(albums) {
+  if (!albums?.length) return '<p>Albums information missing</p>';
+  return `<div class="albums-grid">${albums
+    .map(
+      album => `
+      <div class="album">
+        <h3>${album.title}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Track</th>
+              <th>Time</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${renderTracks(album.tracks)}
+          </tbody>
+        </table>
+      </div>`
+    )
+    .join('')}</div>`;
 }
 
 function renderArtistModal(artist) {
@@ -47,104 +104,19 @@ function renderArtistModal(artist) {
       : `${artist.yearFormed} - present`
     : 'information missing';
 
-  const gender = artist.gender || 'information missing';
-  const membersCount = artist.membersCount || 'information missing';
-  const country = artist.country || 'information missing';
-  const biography = artist.biography || 'information missing';
-
-  let genresRaw =
-    typeof artist.genres !== 'undefined'
-      ? artist.genres
-      : typeof artist.genre !== 'undefined'
-      ? artist.genre
-      : typeof artist.tags !== 'undefined'
-      ? artist.tags
-      : undefined;
-  let genresArr = [];
-  if (Array.isArray(genresRaw)) {
-    if (
-      genresRaw.length === 1 &&
-      typeof genresRaw[0] === 'string' &&
-      genresRaw[0].includes(',')
-    ) {
-      genresArr = genresRaw[0]
-        .split(',')
-        .map(g => g.trim())
-        .filter(Boolean);
-    } else {
-      genresArr = genresRaw
-        .flatMap(g =>
-          typeof g === 'string' && g.includes(',')
-            ? g.split(',').map(s => s.trim())
-            : [typeof g === 'string' ? g.trim() : g]
-        )
-        .filter(Boolean);
-    }
-  } else if (typeof genresRaw === 'string') {
-    genresArr = genresRaw
-      .split(',')
-      .map(g => g.trim())
-      .filter(Boolean);
-  }
-  genresArr = Array.from(new Set(genresArr));
-  console.log(
-    'MODAL genresArr:',
-    genresArr,
-    'artist.genres:',
-    artist.genres,
-    'artist.genre:',
-    artist.genre,
-    'artist.tags:',
-    artist.tags
-  );
-  const genres = genresArr.length
-    ? genresArr.map(g => `<span class="genre">${g}</span>`).join(' ')
-    : '<span class="genre">information missing</span>';
+  const genresArr = getGenres(artist);
+  const genres = renderGenres(genresArr);
   const imageUrl = artist.imageUrl || '';
-
-  const albumsHtml = artist.albums?.length
-    ? `<div class="albums-grid">${artist.albums
-        .map(album => {
-          const tracksHeader = `
-            <tr>
-              <th>Track</th>
-              <th>Time</th>
-              <th>Link</th>
-            </tr>`;
-          const tracksRows = album.tracks
-            .map(track => {
-              const youtubeLink = track.youtubeUrl
-                ? `<a href="${track.youtubeUrl}" class="youtube-link" target="_blank" rel="noopener noreferrer" title="Open on YouTube">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.12C19.228 3.5 12 3.5 12 3.5s-7.228 0-9.386.566A2.994 2.994 0 0 0 .502 6.186C0 8.344 0 12 0 12s0 3.656.502 5.814a2.994 2.994 0 0 0 2.112 2.12C4.772 20.5 12 20.5 12 20.5s7.228 0 9.386-.566a2.994 2.994 0 0 0 2.112-2.12C24 15.656 24 12 24 12s0-3.656-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                  </a>`
-                : '';
-              return `
-                <tr>
-                  <td>${track.title}</td>
-                  <td>${track.duration}</td>
-                  <td>${youtubeLink}</td>
-                </tr>`;
-            })
-            .join('');
-          return `
-            <div class="album">
-              <h3>${album.title}</h3>
-              <table>
-                <thead>${tracksHeader}</thead>
-                <tbody>${tracksRows}</tbody>
-              </table>
-            </div>`;
-        })
-        .join('')}</div>`
-    : '<p>Albums information missing</p>';
+  const albumsHtml = renderAlbums(artist.albums);
 
   modalContent.innerHTML = `
     <div class="modal-header">
       <h2 class="artist-mod-title">${artist.name}</h2>
       <button class="button-close" aria-label="Close">
-        <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M20.5933 2.20301C20.4794 1.78041 20.2568 1.39501 19.9477 1.08518C19.6386 0.775338 19.2537 0.551868 18.8313 0.437007C17.2653 0.00700739 11.0003 7.59651e-06 11.0003 7.59651e-06C11.0003 7.59651e-06 4.73633 -0.00699261 3.16933 0.404007C2.74725 0.524154 2.36315 0.750785 2.0539 1.06214C1.74464 1.3735 1.52062 1.75913 1.40333 2.18201C0.99033 3.74801 0.98633 6.99601 0.98633 6.99601C0.98633 6.99601 0.98233 10.26 1.39233 11.81C1.62233 12.667 2.29733 13.344 3.15533 13.575C4.73733 14.005 10.9853 14.012 10.9853 14.012C10.9853 14.012 17.2503 14.019 18.8163 13.609C19.2388 13.4943 19.6241 13.2714 19.934 12.9622C20.2439 12.653 20.4677 12.2682 20.5833 11.846C20.9973 10.281 21.0003 7.03401 21.0003 7.03401C21.0003 7.03401 21.0203 3.76901 20.5933 2.20301ZM8.99633 10.005L9.00133 4.00501L14.2083 7.01001L8.99633 10.005Z" fill="white" />
-</svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
       </button>
     </div>
     <div class="artist-main-info">
@@ -152,41 +124,34 @@ function renderArtistModal(artist) {
       <div class="artist-info">
         <div class="artist-info-grid2">
           <div class="info-col">
-            <div class="info-block">
-              <span class="info-label">Years active</span>
-              <span class="info-value">${yearsInfo}</span>
-            </div>
-            <div class="info-block">
-              <span class="info-label">Members</span>
-              <span class="info-value">${membersCount}</span>
-            </div>
+            <div class="info-block"><span class="info-label">Years active</span><span class="info-value">${yearsInfo}</span></div>
+            <div class="info-block"><span class="info-label">Members</span><span class="info-value">${
+              artist.membersCount || 'information missing'
+            }</span></div>
           </div>
           <div class="info-col">
-            <div class="info-block">
-              <span class="info-label">Sex</span>
-              <span class="info-value">${gender}</span>
-            </div>
-            <div class="info-block">
-              <span class="info-label">Country</span>
-              <span class="info-value">${country}</span>
-            </div>
+            <div class="info-block"><span class="info-label">Sex</span><span class="info-value">${
+              artist.gender || 'information missing'
+            }</span></div>
+            <div class="info-block"><span class="info-label">Country</span><span class="info-value">${
+              artist.country || 'information missing'
+            }</span></div>
           </div>
         </div>
-        <p class="biography"><strong>Biography</strong> ${biography}</p>
-        <div class="genres">
-          <strong>Genres</strong> ${genres}
-        </div>
+        <p class="biography"><strong>Biography</strong> ${
+          artist.biography || 'information missing'
+        }</p>
+        <div class="genres"><strong>Genres</strong> ${genres}</div>
       </div>
     </div>
     <div class="albums">
-      <h3>Albums</h3>
+      <h3 class="title_album">Albums</h3>
       ${albumsHtml}
     </div>`;
 
   modalContent
     .querySelector('.button-close')
     .addEventListener('click', closeModal);
-
   addYoutubeListeners();
 }
 
@@ -196,39 +161,34 @@ async function fetchArtistAndOpenModal(id) {
     modalContent.innerHTML = '';
     openModal();
 
-    const response = await axios.get(
+    const { data: artistRaw } = await axios.get(
       `https://sound-wave.b.goit.study/api/artists/${id}`
     );
-    const artistRaw = response.data;
-    console.log(
-      'MODAL artistRaw:',
-      artistRaw,
-      'id:',
-      artistRaw._id,
-      'name:',
-      artistRaw.strArtist || artistRaw.name
+    let { data: allArtists } = await axios.get(
+      `https://sound-wave.b.goit.study/api/artists`
     );
-    console.log(
-      'MODAL artistRaw.genres:',
-      artistRaw.genres,
-      'typeof:',
-      typeof artistRaw.genres
-    );
+    let genres =
+      allArtists.artists.find(a => a._id === id)?.genres ||
+      artistRaw.genres ||
+      [];
 
-    let genres = artistRaw.genres;
-    if (!genres && typeof artistRaw.genres !== 'undefined') {
-      genres = artistRaw.genres;
+    let albumsArray = [];
+    if (Array.isArray(artistRaw.albumsList)) {
+      albumsArray = artistRaw.albumsList;
+    } else {
+      const { data: allAlbums } = await axios.get(
+        `https://sound-wave.b.goit.study/api/artists/${id}/albums`
+      );
+      albumsArray = Array.isArray(allAlbums)
+        ? allAlbums
+        : Array.isArray(allAlbums.albums)
+        ? allAlbums.albums
+        : Array.isArray(allAlbums.albumsList)
+        ? allAlbums.albumsList
+        : Array.isArray(allAlbums.results)
+        ? allAlbums.results
+        : [];
     }
-    console.log(
-      'MODAL genres for artist:',
-      genres,
-      'typeof:',
-      typeof genres,
-      'id:',
-      artistRaw._id,
-      'name:',
-      artistRaw.strArtist || artistRaw.name
-    );
 
     const artist = {
       name: artistRaw.strArtist || artistRaw.name || 'No name',
@@ -242,64 +202,27 @@ async function fetchArtistAndOpenModal(id) {
       membersCount: artistRaw.intMembers || artistRaw.membersCount || '',
       country: artistRaw.strCountry || artistRaw.country || '',
       biography: artistRaw.strBiographyEN || artistRaw.bio || '',
-      genres: artistRaw.genres,
+      genres,
       genre: artistRaw.genre,
       tags: artistRaw.tags,
-      albums: [],
+      albums: albumsArray.map(album => ({
+        title: album.strAlbum || album.title || 'No title',
+        tracks: Array.isArray(album.tracks)
+          ? album.tracks.map(track => ({
+              title: track.strTrack || track.title || 'No title',
+              duration: track.intDuration
+                ? Math.floor(track.intDuration / 60000) +
+                  ':' +
+                  String(
+                    Math.floor((track.intDuration % 60000) / 1000)
+                  ).padStart(2, '0')
+                : '',
+              youtubeUrl:
+                track.movie && track.movie !== 'null' ? track.movie : '',
+            }))
+          : [],
+      })),
     };
-    console.log(
-      'MODAL artist.genres before modal:',
-      artist.genres,
-      'typeof:',
-      typeof artist.genres,
-      'id:',
-      artistRaw._id,
-      'name:',
-      artistRaw.strArtist || artistRaw.name
-    );
-
-    let albumsArray = [];
-    if (artistRaw.albumsList && Array.isArray(artistRaw.albumsList)) {
-      albumsArray = artistRaw.albumsList;
-    } else {
-      const albumsRes = await axios.get(
-        `https://sound-wave.b.goit.study/api/artists/${id}/albums`
-      );
-      const allAlbums = albumsRes.data;
-      console.log('allAlbums:', allAlbums);
-      if (Array.isArray(allAlbums)) {
-        albumsArray = allAlbums;
-      } else if (allAlbums && Array.isArray(allAlbums.albums)) {
-        albumsArray = allAlbums.albums;
-      } else if (allAlbums && Array.isArray(allAlbums.albumsList)) {
-        albumsArray = allAlbums.albumsList;
-      } else if (allAlbums && Array.isArray(allAlbums.results)) {
-        albumsArray = allAlbums.results;
-      } else {
-        console.warn('Unknown albums structure:', allAlbums);
-        albumsArray = [];
-      }
-    }
-
-    console.log('albumsArray:', albumsArray);
-    artist.albums = albumsArray.map(album => ({
-      title: album.strAlbum || album.title || 'No title',
-      tracks: Array.isArray(album.tracks)
-        ? album.tracks.map(track => ({
-            title: track.strTrack || track.title || 'No title',
-            duration: track.intDuration
-              ? Math.floor(track.intDuration / 60000) +
-                ':' +
-                String(Math.floor((track.intDuration % 60000) / 1000)).padStart(
-                  2,
-                  '0'
-                )
-              : '',
-            youtubeUrl:
-              track.movie && track.movie !== 'null' ? track.movie : '',
-          }))
-        : [],
-    }));
 
     renderArtistModal(artist);
   } catch (error) {
@@ -315,7 +238,7 @@ if (artistList) {
   artistList.addEventListener('click', e => {
     const btn = e.target.closest('.learn-more');
     if (!btn) return;
-    const card = btn.closest('.artist-card');
+    const card = btn.closest('.artist-cards');
     if (!card) return;
     const artistId = card.dataset.id;
     fetchArtistAndOpenModal(artistId);

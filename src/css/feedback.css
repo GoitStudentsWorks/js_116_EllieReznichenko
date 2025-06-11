@@ -66,6 +66,18 @@
   justify-content: center;
 }
 
+.swiper-button-prev:hover svg,
+.swiper-button-next:hover svg,
+.swiper-button-prev:focus svg,
+.swiper-button-next:focus svg {
+  stroke: #764191 !important;
+}
+
+.swiper-button-prev:active svg,
+.swiper-button-next:active svg {
+  stroke: #988aa0 !important;
+}
+
 @media screen and (min-width: 768px) {
   .feedback_description {
     font-size: 26px;
@@ -104,11 +116,11 @@
   }
 }
 .swiper-scrollbar {
-  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
 @media screen and (min-width: 1440px) {
   .swiper-scrollbar {
-      padding-bottom: 80px;
+      margin-bottom: 80px;
     }
 }
 .feedback-modal-btn {
@@ -142,4 +154,17 @@
   .feedback-modal-btn {
       width: 177px;
     }
+}
+.feedback-modal-btn:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+  transition: filter 0.3s, transform 0.2s;
+}
+
+.feedback-modal-btn:focus {
+  background: linear-gradient(135deg, #9e58c4, #763b96);
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.15),
+    0 0 4px rgba(255, 255, 255, 0.05);
+  outline: none;
+  transition: background 0.3s ease, box-shadow 0.3s;
 }

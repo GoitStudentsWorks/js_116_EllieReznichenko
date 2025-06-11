@@ -24,9 +24,7 @@
 .artists-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
   justify-content: center;
-  margin-bottom: 32px;
   padding: 0;
 }
 
@@ -51,7 +49,7 @@
 .genres {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
   margin-bottom: 16px;
   margin-top: 24px;
 }
@@ -83,14 +81,13 @@
 }
 
 .learn-more {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 1.5;
   color: #fff;
-  border-radius: 12px;
   display: flex;
   gap: 8px;
+  margin-bottom: 64px;
   align-items: center;
   justify-content: flex-start;
   background-color: transparent;
@@ -99,20 +96,32 @@
   padding: 0;
 }
 
+
+.artist-cards:last-child .learn-more {
+  margin-bottom: 32px;
+}
+.learn-more:hover,
+.learn-more:focus {
+  color: #764191;
+}
+
+.learn-more:active {
+  color: #988aa0;
+}
+
 .icon {
-  fill: #ffffff;
+  fill: currentColor;
   width: 24px; 
   height: 24px;
 }
 
 .load-more-btn {
-  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 1.5;
   color: #fff;
   border-radius: 12px;
-  display: flex;
+  display: flex !important;
   gap: 12px;
   align-items: center;
   justify-content: center;
@@ -128,11 +137,22 @@
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
 }
+.load-more-btn:hover {
+  filter: brightness(1.2);
+  transform: translateY(-1px);
+  transition: filter 0.3s, transform 0.2s;
+}
+.load-more-btn:focus {
+  background: linear-gradient(135deg, #9e58c4, #763b96);
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.15),
+    0 0 4px rgba(255, 255, 255, 0.05);
+  outline: none;
+  transition: background 0.3s ease, box-shadow 0.3s;
+}
 
 .loader {
   display: flex;
   justify-content: center;
-  margin: 20px auto;
 }
 
 .loader-spinner {
@@ -148,6 +168,12 @@
   display: none;
 }
 
+.img{
+  border-radius: 16px;
+  width: 100%;
+  height: 177px;
+}
+
 @media screen and (min-width: 768px) {
   .artists-section-subtitle {
     width: 704px;
@@ -161,6 +187,7 @@
 
   .img{
     width: 100%;
+    height: 433px;
   }
 
   .artist-cards {
@@ -174,6 +201,9 @@
   .load-more-btn {
     width: 340px;
   }
+  .learn-more{
+    margin-bottom: 32px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -184,7 +214,7 @@
 
   .artists-section-subtitle {
     font-size: 60px;
-    max-width: 863px;
+    max-width: 563px;
     height: 144px;
     margin-bottom: 80px;
   }
@@ -196,10 +226,12 @@
     gap: 32px; 
   }
 
+  .img{
+    height: 393px;
+  }
+
   .artist-cards {
-    
     flex-basis: calc(50% - 16px);
-    
   }
 
   .artist-card img {
