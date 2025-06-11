@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   form.setAttribute('novalidate', true);
 
   form.addEventListener('submit', async e => {
-    e.preventDefault(); 
+    e.preventDefault(); // зупиняємо дефолтну відправку форми
 
     // Видаляємо старі помилки
     const inputs = form.querySelectorAll('input, textarea');
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (hasError) {
-      return;
+      return; // є помилки — зупиняємо виконання
     }
 
     try {

@@ -12,6 +12,7 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 18px;
     line-height: 150%;
 }
