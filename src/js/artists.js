@@ -4,16 +4,9 @@ import spriteUrl from '/img/sprite.svg?url';
 const refs = {
   artistCardsContainer: document.querySelector('#artists-grid'),
   loadMoreBtn: document.getElementById('load-more-btn'),
-  loader: document.querySelector('.loader'), 
 };
 
-function createArtistCard({
-  _id,
-  strArtist,
-  genres,
-  strArtistThumb,
-  strBiographyEN,
-}) {
+function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiographyEN }) {
   const genreTags = (genres || [])
     .map(genre => `<li class="genre">${genre}</li>`)
     .join('');
@@ -23,9 +16,10 @@ function createArtistCard({
       ? strBiographyEN.slice(0, 100) + '...'
       : strBiographyEN || '';
 
-  const imgSrc = strArtistThumb?.trim()
-    ? strArtistThumb
-    : '/img/artists/Placeholder_Image.jpg';
+  const imgSrc =
+    strArtistThumb?.trim()
+      ? strArtistThumb
+      : '/img/artists/Placeholder_Image.jpg';
 
   return `
     <li class="artist-cards" data-id="${_id}">
@@ -46,9 +40,6 @@ function createArtistCard({
 let page = 1;
 
 async function renderArtistsChunk() {
-  refs.loadMoreBtn.style.display = 'none';
-  refs.loader.style.display = 'flex';
-
   try {
     const data = await fetchArtists(page, limit);
 
@@ -62,7 +53,8 @@ async function renderArtistsChunk() {
     if (page * limit >= data.total) {
       refs.loadMoreBtn.style.display = 'none';
     } else {
-      refs.loadMoreBtn.style.display = 'block';
+      refs.loadMoreBtn.classList.remove('loading');
+      refs.loadMoreBtn.querySelector('.loader-spinner').classList.add('visually-hidden');
     }
 
     page++;
@@ -70,12 +62,16 @@ async function renderArtistsChunk() {
     console.error(error);
     showToast('Помилка завантаження артистів');
     refs.loadMoreBtn.style.display = 'none';
-  } finally {
-    refs.loader.style.display = 'none';
   }
 }
 
-refs.loadMoreBtn.addEventListener('click', renderArtistsChunk);
+
+refs.loadMoreBtn.addEventListener('click', () => {
+  refs.loadMoreBtn.classList.add('loading');
+  refs.loadMoreBtn.querySelector('.loader-spinner').classList.remove('visually-hidden');
+  renderArtistsChunk();
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
   renderArtistsChunk();

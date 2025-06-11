@@ -3,16 +3,15 @@
     <h2 class="artists-section-title">Artists</h2>
     <h2 class="artists-section-subtitle">Explore Your New Favorite Artists</h2>
 
-    <ul id="artists-grid" class="artists-list">
-    </ul>
+    <ul id="artists-grid" class="artists-list"></ul>
 
-    <div class="loader" style="display: none;">Loading...</div>
+   <button id="load-more-btn" class="load-more-btn">
+  <span class="btn-text">Load More</span>
+  <svg class="icon load-more-btn-icon" width="24" height="24">
+    <use href="/img/sprite.svg#icon-down-arrow-load-more"></use>
+  </svg>
+  <span class="loader-spinner visually-hidden"></span>
+</button>
 
-    <button id="load-more-btn" class="load-more-btn">
-      <span>Load More</span>
-      <svg class="icon load-more-btn-icon" width="24" height="24">
-        <use href="/img/sprite.svg#icon-down-arrow-load-more"></use>
-      </svg>
-    </button>
   </div>
 </section>
