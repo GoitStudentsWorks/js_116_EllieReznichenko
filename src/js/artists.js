@@ -1,23 +1,31 @@
-import {
-  fetchArtists,
-  limit,
-  showToast,
-} from './artists-api.js';
- import spriteUrl from '/img/sprite.svg?url';
+import { fetchArtists, limit, showToast } from './artists-api.js';
+
 const refs = {
   artistCardsContainer: document.querySelector('#artists-grid'),
   loadMoreBtn: document.getElementById('load-more-btn'),
 };
 
+function createArtistCard({
+  _id,
+  strArtist,
+  genres,
+  strArtistThumb,
+  strBiographyEN,
+}) {
+  const genreTags = (genres || [])
+    .map(genre => `<span class="genre">${genre}</span>`)
+    .join('');
+  const shortBio =
+    strBiographyEN?.length > 100
+      ? strBiographyEN.slice(0, 100) + '...'
+      : strBiographyEN || '';
 
-function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiographyEN }) {
-  const genreTags = (genres || []).map(genre => `<span class="genre">${genre}</span>`).join('');
-  const shortBio = strBiographyEN?.length > 100 ? strBiographyEN.slice(0, 100) + '...' : (strBiographyEN || '');
-
-  const imgSrc = strArtistThumb && typeof strArtistThumb === 'string' && strArtistThumb.trim() !== ''
-    ? strArtistThumb
-    : '/img/artists/Placeholder_Image.jpg';
-
+  const imgSrc =
+    strArtistThumb &&
+    typeof strArtistThumb === 'string' &&
+    strArtistThumb.trim() !== ''
+      ? strArtistThumb
+      : '/img/artists/Placeholder_Image.jpg';
 
   return `
     <li class="artist-cards" data-id="${_id}">
@@ -28,13 +36,12 @@ function createArtistCard({ _id, strArtist, genres, strArtistThumb, strBiography
       <button class="learn-more" data-id="${_id}">
         Learn More
         <svg class="icon" width="24" height="24">
-          <use href="${spriteUrl}#icon-caret-right-learn-more"></use>
+          <use href="/img/sprite.svg#icon-caret-right-learn-more"></use>
         </svg>
       </button>
     </li>
   `;
 }
-
 
 let page = 1;
 
@@ -65,10 +72,7 @@ async function renderArtistsChunk() {
 
 refs.loadMoreBtn.addEventListener('click', renderArtistsChunk);
 
+// Початкове завантаження артистів
 document.addEventListener('DOMContentLoaded', () => {
   renderArtistsChunk();
 });
-
-
-
-
