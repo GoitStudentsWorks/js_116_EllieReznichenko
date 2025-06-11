@@ -125,12 +125,12 @@ body.modal-open {
         color: #fff;
 }
 
-.button-close:hover,
-.button-close:focus {
+.artist-modal-close-icon:hover,
+.artist-modal-close-icon:focus {
   color: #764191;
 }
 
-.button-close:active {
+.artist-modal-close-icon:active {
   color: #988aa0;
 }
 
