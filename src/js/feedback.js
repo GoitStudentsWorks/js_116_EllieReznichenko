@@ -15,7 +15,6 @@ function roundRating(rating) {
   return Math.round(rating);
 }
 
-// Обробка відгуків
 function processFeedbacks(rawFeedbacks) {
   return rawFeedbacks.map(fb => ({
     ...fb,
@@ -23,35 +22,38 @@ function processFeedbacks(rawFeedbacks) {
   }));
 }
 
-// Отримання випадкових відгуків
-
-const getRandomFeedbacks = async (count = 3) => {
+const getRandomFeedbacks = async () => {
   try {
     const all = await fetchFeedbacks();
+    if (all.length === 0) return [];
 
-    const random = [];
-    const used = new Set();
+    const first = all[0];
+    const last = all[all.length - 1];
 
-    while (random.length < count && used.size < all.length) {
-      const i = Math.floor(Math.random() * all.length);
-      if (!used.has(i)) {
-        used.add(i);
-        random.push(all[i]);
-      }
+    let random = null;
+    if (all.length > 2) {
+      let i;
+      do {
+        i = Math.floor(Math.random() * all.length);
+      } while (i === 0 || i === all.length - 1);
+      random = all[i];
     }
 
-    return random;
+    const result = [first];
+    if (random) result.push(random);
+    if (all.length > 1) result.push(last);
+
+    return result;
   } catch (error) {
     console.error('Не вдалося отримати відгуки:', error);
     return [];
   }
 };
 
-// Основна логіка
 document.addEventListener('DOMContentLoaded', () => {
   (async () => {
     try {
-      const rawFeedbacks = await getRandomFeedbacks(3);
+      const rawFeedbacks = await getRandomFeedbacks(1);
       const feedbacks = processFeedbacks(rawFeedbacks);
 
       const wrapper = document.querySelector('.swiper-wrapper');
@@ -72,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         wrapper.appendChild(slide);
       });
 
-      // Ініціалізація Swiper
       new Swiper('.swiper', {
         direction: 'horizontal',
         loop: false,
@@ -97,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         },
       });
 
-      // Ініціалізація Raty для кожного відгуку
       const ratingEls = document.querySelectorAll('.rating');
       ratingEls.forEach(el => {
         const score = parseInt(el.dataset.score, 10);
