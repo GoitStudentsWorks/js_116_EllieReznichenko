@@ -1,12 +1,11 @@
-import { fetchHeroArtists } from './artists-api.js';
+import { fetchArtists } from './artists-api.js';
 
 const columnLeft = document.querySelector('.column-left');
 const columnRight = document.querySelector('.column-right');
 
-
 async function renderHeroBackground() {
   try {
-    const data = await fetchHeroArtists();
+    const data = await fetchArtists();
     const artists = data.artists;
 
     const repeatCount = 10;
@@ -46,4 +45,3 @@ async function renderHeroBackground() {
 }
 
 renderHeroBackground();
-
