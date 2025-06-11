@@ -3,6 +3,7 @@ import { fetchHeroArtists } from './artists-api.js';
 const columnLeft = document.querySelector('.column-left');
 const columnRight = document.querySelector('.column-right');
 
+
 async function renderHeroBackground() {
   try {
     const data = await fetchHeroArtists();
@@ -45,3 +46,4 @@ async function renderHeroBackground() {
 }
 
 renderHeroBackground();
+

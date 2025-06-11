@@ -2,7 +2,6 @@
   <div class="flex-container">
     <div class="photo-section-aboutUs aboutUs_container">
       <picture class="image-wrapper">
-        <!-- Мобильные: до 767px — по грудь -->
         <source
           media="(max-width: 767px)"
           srcset="
@@ -11,7 +10,6 @@
           "
         />
 
-        <!-- Планшеты: от 768px до 1439px — по пояс -->
         <source
           media="(min-width: 768px) and (max-width: 1439px)"
           srcset="
@@ -20,7 +18,6 @@
           "
         />
 
-        <!-- Десктопы: от 1440px — полное изображение -->
         <source
           media="(min-width: 1440px)"
           srcset="
@@ -29,22 +26,12 @@
           "
         />
 
-        <!-- Резерв для старых браузеров -->
         <img
           src="/img/about-us/aboutUs_1x.png"
           alt="about_us"
           class="photo-aboutUs"
         />
       </picture>
-
-      <!--<img
-        srcset="/img/about-us/aboutUs.png 1x, /img/about-us/aboutUs_2x.png 2x"
-        src="/img/about-us/aboutUs.png"
-        alt="About us"
-        class="photo-aboutUs"
-        width="280px"
-        height="169px"
-      />-->
     </div>
 
     <div class="aboutUs-list-text test-two">
