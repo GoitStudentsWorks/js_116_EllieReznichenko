@@ -25,6 +25,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 64px;
+  justify-content: center;
+  margin-bottom: 32px;
 }
 
 
@@ -95,9 +97,6 @@
 }
 
 
-.artist-cards:last-child {
-  margin-bottom: 32px;
-}
 .learn-more:hover,
 .learn-more:focus {
   color: #764191;
@@ -208,7 +207,7 @@
 
   .artists-list {
     gap: 32px; 
-    justify-content: center;
+    margin-bottom: 64px;
   }
 
   .img {
@@ -227,9 +226,6 @@
   .load-more-btn {
     width: 340px;
   }
-  .artist-cards:last-child {
-    margin-bottom: 64px;
-}
 }
 
 @media screen and (min-width: 1440px) {
@@ -261,11 +257,7 @@
     flex-basis: calc(50% - 16px);
   }
 
-  .artist-cards:last-child {
-    margin-bottom: 64px;
-}
-
-
+  
   .artist-card img {
     height: auto;
   }
