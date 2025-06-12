@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Показываем уведомление с плавным появлением
       if (notificationEl) {
         notificationEl.textContent =
-          'Your feedback has been received. The universe has heard you.';
+          'Your feedback has been received. The Universe has heard you.';
         notificationEl.classList.add('is-visible');
 
         setTimeout(() => {

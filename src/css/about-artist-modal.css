@@ -9,7 +9,7 @@ body.modal-open {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.17);
   justify-content: center;
   align-items: flex-start;
   z-index: 1000;
@@ -395,45 +395,77 @@ body.modal-open {
   }
 }
 .album {
-  background: #232526;
+  background: #1E1C1F;
   border-radius: 10px;
-  padding: 14px 12px 10px 12px;
+  padding: 14px 11px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 .album h3 {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
   margin-top: 0;
   margin-bottom: 8px;
   font-size: 1.1rem;
   color: #fff;
 }
+
+
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 8px;
-  background: #181818;
   border-radius: 8px;
   overflow: hidden;
 }
+.artist-tr td:first-child,
+.artist-tr th:first-child {
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+}
+
+.artist-tr td:last-child,
+.artist-tr th:last-child {
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+}
 th,
 td {
-  border: 1px solid #444;
+
+  border: none;
   padding: 7px 8px;
   text-align: left;
   font-size: 1rem;
 }
+thead {
+  border-radius: 8px;
+}
+tbody {
+  border-radius: 8px;
+}
 th {
-  background: #232526;
+  font-weight: 600;
+    font-size: 8px;
+    line-height: 150%;
+  background: #262626;
   color: white;
   font-weight: 600;
 }
+tr {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+  border-radius: 8px;
+  background: #202124
+}
 tr:nth-child(even) td {
-  background: #202124;
+  background: rgba(255, 255, 255, 0.1);
 }
 tr:nth-child(odd) td {
-  background: #181818;
+  background: #1E1C1F;
 }
 
 .modal-content::-webkit-scrollbar {
