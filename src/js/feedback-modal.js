@@ -1,24 +1,17 @@
 import starFilled from '/img/feedback/star-filled.png';
 import starEmpty from '/img/feedback/star-empty.png';
-import { sendFeedback } from '/js/artists-api';
+import { sendFeedback } from '/js/artists-api.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.querySelector('[data-feedback-modal]');
-  const openBtn = document.querySelector('[data-feedback-modal-open]');
-  const closeBtn = document.querySelector('[data-feedback-modal-close]');
-  const starsContainer = document.getElementById('feedback-star-rating');
-  const form = modal?.querySelector('.feedback-modal-form');
-  const notificationEl = document.querySelector('.feedback-modal-notification');
+const modal = document.querySelector('[data-feedback-modal]');
+const openBtn = document.querySelector('[data-feedback-modal-open]');
+const closeBtn = document.querySelector('[data-feedback-modal-close]');
+const starsContainer = document.getElementById('feedback-star-rating');
+const form = modal?.querySelector('.feedback-modal-form');
+const notificationEl = document.querySelector('.feedback-modal-notification');
 
-  if (!modal || !form || !starsContainer) return;
-
-  function lockBodyScroll() {
-    document.body.classList.add('body-lock');
-  }
-
-  function unlockBodyScroll() {
-    document.body.classList.remove('body-lock');
-  }
+if (modal && form && starsContainer) {
+  const lockBodyScroll = () => document.body.classList.add('body-lock');
+  const unlockBodyScroll = () => document.body.classList.remove('body-lock');
 
   openBtn?.addEventListener('click', () => {
     modal.classList.remove('is-hidden');
@@ -47,21 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
       star.alt = `Star ${i}`;
       star.dataset.value = i;
       star.style.cursor = 'pointer';
+
       star.addEventListener('click', () => {
         currentRating = i;
         renderStars(currentRating);
       });
+
       starsContainer.appendChild(star);
     }
   }
 
   renderStars(0);
-  form.setAttribute('novalidate', true);
 
+  form.setAttribute('novalidate', true);
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
-    // Очистка ошибок
     const inputs = form.querySelectorAll('input, textarea');
     inputs.forEach(input => {
       input.classList.remove('input-error');
@@ -115,21 +109,17 @@ document.addEventListener('DOMContentLoaded', () => {
         descr: messageValue,
       });
 
-      // Закрываем модалку
       modal.classList.add('is-hidden');
       unlockBodyScroll();
 
-      // Сбрасываем форму и рейтинг
       form.reset();
       currentRating = 0;
       renderStars(currentRating);
 
-      // Показываем уведомление с плавным появлением
       if (notificationEl) {
         notificationEl.textContent =
           'Your feedback has been received. The universe has heard you.';
         notificationEl.classList.add('is-visible');
-
         setTimeout(() => {
           notificationEl.classList.remove('is-visible');
         }, 3000);
@@ -139,4 +129,4 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(error);
     }
   });
-});
+}
