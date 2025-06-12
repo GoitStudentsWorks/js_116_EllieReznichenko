@@ -58,7 +58,7 @@ function renderTracks(tracks) {
   return tracks
     .map(
       track => `
-      <tr>
+      <tr class="artist-tr">
         <td>${track.title}</td>
         <td>${track.duration}</td>
         <td>${
@@ -82,7 +82,7 @@ function renderAlbums(albums) {
         <h3>${album.title}</h3>
         <table>
           <thead>
-            <tr>
+            <tr class="artist-tr">
               <th>Track</th>
               <th>Time</th>
               <th>Link</th>
