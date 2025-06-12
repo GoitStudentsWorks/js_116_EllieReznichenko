@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { fetchArtistById } from './artists-api.js';
 
 const modal = document.querySelector('.modal');
 const modalContent = modal.querySelector('.modal-content');
@@ -49,9 +50,17 @@ function getGenres(artist) {
 }
 
 function renderGenres(genresArr) {
-  return genresArr[0] === 'information missing'
-    ? '<span class="genre">information missing</span>'
-    : genresArr.map(g => `<span class="genre">${g}</span>`).join(' ');
+  if (genresArr[0] === 'information missing') {
+    return `<ul class="genre-list"><li class="genre">information missing</li></ul>`;
+  }
+  return `<ul class="genre-list">${genresArr.map(g => `<li class="genre">${g}</li>`).join('')}</ul>`;
+}
+
+function formatDuration(ms) {
+  const totalSeconds = Math.floor(Number(ms) / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
 function renderTracks(tracks) {
@@ -139,9 +148,7 @@ function renderArtistModal(artist) {
           </div>
         </div>
         <strong>Biography</strong>
-        <p class="biography">
-  ${artist.biography || 'information missing'}
-</p>
+        <p class="biography">${artist.biography || 'information missing'}</p>
         <div class="genres genres-artist"><strong>Genres</strong> ${genres}</div>
       </div>
     </div>
@@ -150,9 +157,7 @@ function renderArtistModal(artist) {
       ${albumsHtml}
     </div>`;
 
-  modalContent
-    .querySelector('.button-close')
-    .addEventListener('click', closeModal);
+  modalContent.querySelector('.button-close').addEventListener('click', closeModal);
   addYoutubeListeners();
 }
 
@@ -162,67 +167,52 @@ async function fetchArtistAndOpenModal(id) {
     modalContent.innerHTML = '';
     openModal();
 
-    const { data: artistRaw } = await axios.get(
-      `https://sound-wave.b.goit.study/api/artists/${id}`
-    );
-    let { data: allArtists } = await axios.get(
-      `https://sound-wave.b.goit.study/api/artists`
-    );
-    let genres =
-      allArtists.artists.find(a => a._id === id)?.genres ||
-      artistRaw.genres ||
-      [];
+    const artistRaw = await fetchArtistById(id);
 
-    let albumsArray = [];
-    if (Array.isArray(artistRaw.albumsList)) {
-      albumsArray = artistRaw.albumsList;
-    } else {
-      const { data: allAlbums } = await axios.get(
-        `https://sound-wave.b.goit.study/api/artists/${id}/albums`
-      );
-      albumsArray = Array.isArray(allAlbums)
-        ? allAlbums
-        : Array.isArray(allAlbums.albums)
-        ? allAlbums.albums
-        : Array.isArray(allAlbums.albumsList)
-        ? allAlbums.albumsList
-        : Array.isArray(allAlbums.results)
-        ? allAlbums.results
-        : [];
+    const formatDuration = ms => {
+      const totalSeconds = Math.floor(Number(ms) / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
+
+    const albumsMap = {};
+    if (Array.isArray(artistRaw.tracksList)) {
+      artistRaw.tracksList.forEach(track => {
+        const albumName = track.strAlbum || 'Unknown Album';
+        if (!albumsMap[albumName]) albumsMap[albumName] = [];
+        albumsMap[albumName].push(track);
+      });
     }
 
+    const albums = Object.entries(albumsMap).map(([albumTitle, tracks]) => ({
+      title: albumTitle,
+      tracks: tracks.map(track => {
+        const youtubeUrl = typeof track.movie === 'string' && track.movie.includes('http')
+          ? track.movie.split(' ')[0]
+          : '';
+        return {
+          title: track.strTrack || 'No title',
+          duration: track.intDuration ? formatDuration(track.intDuration) : '',
+          youtubeUrl,
+        };
+      }),
+    }));
+
     const artist = {
-      name: artistRaw.strArtist || artistRaw.name || 'No name',
-      imageUrl: artistRaw.strArtistThumb || artistRaw.image || '',
-      yearFormed: artistRaw.intFormedYear || artistRaw.yearFormed || '',
+      name: artistRaw.strArtist || 'No name',
+      imageUrl: artistRaw.strArtistThumb || '',
+      yearFormed: artistRaw.intFormedYear || '',
       yearDisbanded:
         artistRaw.intDiedYear && artistRaw.intDiedYear !== 'null'
           ? artistRaw.intDiedYear
           : '',
-      gender: artistRaw.strGender || artistRaw.gender || '',
-      membersCount: artistRaw.intMembers || artistRaw.membersCount || '',
-      country: artistRaw.strCountry || artistRaw.country || '',
-      biography: artistRaw.strBiographyEN || artistRaw.bio || '',
-      genres,
-      genre: artistRaw.genre,
-      tags: artistRaw.tags,
-      albums: albumsArray.map(album => ({
-        title: album.strAlbum || album.title || 'No title',
-        tracks: Array.isArray(album.tracks)
-          ? album.tracks.map(track => ({
-              title: track.strTrack || track.title || 'No title',
-              duration: track.intDuration
-                ? Math.floor(track.intDuration / 60000) +
-                  ':' +
-                  String(
-                    Math.floor((track.intDuration % 60000) / 1000)
-                  ).padStart(2, '0')
-                : '',
-              youtubeUrl:
-                track.movie && track.movie !== 'null' ? track.movie : '',
-            }))
-          : [],
-      })),
+      gender: artistRaw.strGender || '',
+      membersCount: artistRaw.intMembers || '',
+      country: artistRaw.strCountry || '',
+      biography: artistRaw.strBiographyEN || '',
+      genres: Array.isArray(artistRaw.genres) ? artistRaw.genres : [],
+      albums,
     };
 
     renderArtistModal(artist);
