@@ -9,26 +9,18 @@
 .hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 80px;
-  width: 100%;
-  background: linear-gradient(180deg, #060307 0%, rgba(35, 19, 43, 0) 100%);
-  z-index: 2;
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
+  background: linear-gradient(to bottom,
+      #060307 0,
+      rgba(6, 3, 7, 0.9) 40px,
+      rgba(35, 19, 43, 0) 120px,
+      rgba(35, 19, 43, 0) calc(100% - 120px),
+      rgba(6, 3, 7, 0.9) calc(100% - 40px),
+      #060307 100%);
 }
 
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 137px;
-  width: 100%;
-  background: linear-gradient(0deg, #060307 0%, rgba(35, 19, 43, 0) 100%);
-  z-index: 0;
-  pointer-events: none;
-}
 .hero-container {
   max-width: 320px;
   margin: 0 auto;
@@ -95,6 +87,8 @@
   fill: #fff;
 }
 .background-container {
+  justify-content: center;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -106,8 +100,6 @@
   max-height: 385px;
   overflow: hidden;
   object-fit: cover;
-  justify-content: center;
-
 }
 
 .column {
