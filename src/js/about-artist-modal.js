@@ -6,9 +6,15 @@ const modalContent = modal.querySelector('.modal-content');
 const loader = document.querySelector('.loader');
 let youtubeListeners = [];
 
+function handleEscapeKey(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+}
 function openModal() {
   modal.classList.add('is-open');
   document.body.style.overflow = 'hidden';
+  window.addEventListener('keydown', handleEscapeKey);
 }
 
 function closeModal() {
@@ -16,6 +22,7 @@ function closeModal() {
   document.body.style.overflow = '';
   modalContent.innerHTML = '';
   removeYoutubeListeners();
+  window.removeEventListener('keydown', handleEscapeKey);
 }
 
 function removeYoutubeListeners() {
@@ -238,8 +245,4 @@ if (artistList) {
 
 modal.addEventListener('click', e => {
   if (e.target === modal) closeModal();
-});
-
-window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
 });

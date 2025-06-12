@@ -383,8 +383,7 @@ body.modal-open {
 .biography::-webkit-scrollbar-track {
   background: transparent;
 }
-.albums {
-}
+
 .albums-grid {
   display: grid;
   grid-template-columns: 1fr;
