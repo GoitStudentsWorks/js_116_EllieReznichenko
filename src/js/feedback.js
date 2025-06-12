@@ -43,7 +43,8 @@ function pickThreeMarkers(all) {
   try {
     const swiper = new Swiper('.swiper', {
       direction: 'horizontal',
-      loop: true,
+      loop: false,
+      autoHeight: true,
       modules: [Navigation, Pagination],
       pagination: {
         el: '.swiper-pagination',
