@@ -8,27 +8,57 @@ const closeBtn = document.querySelector('[data-feedback-modal-close]');
 const starsContainer = document.getElementById('feedback-star-rating');
 const form = modal?.querySelector('.feedback-modal-form');
 const notificationEl = document.querySelector('.feedback-modal-notification');
+const submitBtn = form?.querySelector('button[type="submit"]');
 
 if (modal && form && starsContainer) {
   const lockBodyScroll = () => document.body.classList.add('body-lock');
   const unlockBodyScroll = () => document.body.classList.remove('body-lock');
 
-  openBtn?.addEventListener('click', () => {
-    modal.classList.remove('is-hidden');
-    lockBodyScroll();
-  });
+  function clearErrors() {
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+      input.classList.remove('input-error');
+      const error = input.parentElement.querySelector('.error-text');
+      if (error) error.remove();
+    });
 
-  closeBtn?.addEventListener('click', () => {
+    const oldStarError = starsContainer.querySelector('.error-text');
+    if (oldStarError) oldStarError.remove();
+    starsContainer.classList.remove('input-error');
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  }
+
+  function onModalClick(e) {
+    console.log('Modal click event detected', e.target);
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
+
+  function closeModal() {
     modal.classList.add('is-hidden');
     unlockBodyScroll();
-  });
+    clearErrors();
 
-  modal.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.classList.add('is-hidden');
-      unlockBodyScroll();
-    }
-  });
+    document.removeEventListener('keydown', onKeyDown);
+    modal.removeEventListener('click', onModalClick);
+  }
+
+  function openModal() {
+    modal.classList.remove('is-hidden');
+    lockBodyScroll();
+
+    document.addEventListener('keydown', onKeyDown);
+    modal.addEventListener('click', onModalClick);
+  }
+
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
 
   let currentRating = 0;
 
@@ -56,16 +86,7 @@ if (modal && form && starsContainer) {
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
-    const inputs = form.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-      input.classList.remove('input-error');
-      const error = input.parentElement.querySelector('.error-text');
-      if (error) error.remove();
-    });
-
-    const oldStarError = starsContainer.querySelector('.error-text');
-    if (oldStarError) oldStarError.remove();
-    starsContainer.classList.remove('input-error');
+    clearErrors();
 
     let hasError = false;
 
@@ -102,6 +123,8 @@ if (modal && form && starsContainer) {
 
     if (hasError) return;
 
+    if (submitBtn) submitBtn.disabled = true;
+
     try {
       await sendFeedback({
         name: nameValue,
@@ -109,8 +132,7 @@ if (modal && form && starsContainer) {
         descr: messageValue,
       });
 
-      modal.classList.add('is-hidden');
-      unlockBodyScroll();
+      closeModal();
 
       form.reset();
       currentRating = 0;
@@ -127,6 +149,8 @@ if (modal && form && starsContainer) {
     } catch (error) {
       alert('Error sending feedback. Please try again later.');
       console.error(error);
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
 }
