@@ -2,6 +2,17 @@
   padding-block: 64px !important;
 }
 
+.swiper-pagination-bullet {
+  margin: 0 !important;
+}
+
+.swiper-pagination {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  overflow: visible !important;
+}
+
 .swiper-slide {
   display: flex;
   flex-direction: column;
