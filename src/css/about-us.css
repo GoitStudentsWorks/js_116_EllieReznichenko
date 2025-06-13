@@ -1,9 +1,17 @@
-@media screen and (min-width: 320px) and (max-width: 375px) {
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .aboutUs_container {
+      max-width: 280px;
+    }
+  
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   .container-about-us {
     padding-bottom: 64px;
     padding-top: 64px;
   }
-
   .about-us {
     fill: white;
   }
@@ -16,6 +24,7 @@
     background-color: transparent;
   }
   .aboutUs-list-text {
+    max-width: 280px;
     margin-top: 48px;
   }
 
@@ -39,6 +48,9 @@
 }
 
 @media screen and (min-width: 768px) {
+  /* .aboutUs_container {
+      max-width: 704px;
+    } */
   .container-about-us {
     padding-bottom: 64px;
     padding-top: 64px;
@@ -73,6 +85,11 @@
 }
 
 @media screen and (min-width: 1440px) {
+  /* .aboutUs_container {
+      max-width: 640px;
+    } */
+    .aboutUs_container {
+      height: 664px; }
   .flex-container {
     height: 664px;
     display: flex;
