@@ -11,18 +11,28 @@ function handleEscapeKey(e) {
     closeModal();
   }
 }
+
+// Плавное открытие
 function openModal() {
-  modal.classList.add('is-open');
+  modal.style.display = 'flex';
+  requestAnimationFrame(() => {
+    modal.classList.add('is-open');
+  });
   document.body.style.overflow = 'hidden';
   window.addEventListener('keydown', handleEscapeKey);
 }
 
+// Плавное закрытие
 function closeModal() {
   modal.classList.remove('is-open');
   document.body.style.overflow = '';
   modalContent.innerHTML = '';
   removeYoutubeListeners();
   window.removeEventListener('keydown', handleEscapeKey);
+
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 100);
 }
 
 function removeYoutubeListeners() {
