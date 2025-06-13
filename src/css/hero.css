@@ -13,12 +13,13 @@
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(to bottom,
-      #060307 0,
-      rgba(6, 3, 7, 0.9) 40px,
-      rgba(35, 19, 43, 0) 120px,
-      rgba(35, 19, 43, 0) calc(100% - 120px),
-      rgba(6, 3, 7, 0.9) calc(100% - 40px),
-      #060307 100%);
+    #060307 0,
+    rgba(6, 3, 7, 0.28) 25px,
+    rgba(35, 19, 43, 0.04) 60px,
+    rgba(35, 19, 43, 0) 80px,
+    rgba(35, 19, 43, 0) 80px,
+    rgba(6, 3, 7, 0.28) calc(100% - 25px),
+    #060307 100%);
 }
 
 .hero-container {
