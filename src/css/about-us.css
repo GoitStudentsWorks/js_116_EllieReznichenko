@@ -48,9 +48,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  /* .aboutUs_container {
-      max-width: 704px;
-    } */
   .container-about-us {
     padding-bottom: 64px;
     padding-top: 64px;
@@ -85,9 +82,6 @@
 }
 
 @media screen and (min-width: 1440px) {
-  /* .aboutUs_container {
-      max-width: 640px;
-    } */
     .aboutUs_container {
       height: 664px; }
   .flex-container {

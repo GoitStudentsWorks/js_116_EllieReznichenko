@@ -1,5 +1,5 @@
 .container_feedback {
-  padding-block: 64px !important;
+  padding: 64px 0;
 }
 
 .swiper-pagination-bullet {
@@ -122,6 +122,7 @@
 }
 
 @media screen and (min-width: 1440px) {
+  
   .feedback_description {
     font-size: 32px;
     line-height: 130%;
@@ -133,18 +134,12 @@
   }
 
   .container_feedback {
-    padding-block: 112px;
+    padding: 112px 0;
   }
 }
-.swiper-scrollbar {
-  margin-bottom: 16px;
-}
-@media screen and (min-width: 1440px) {
-  .swiper-scrollbar {
-    margin-bottom: 80px;
-  }
-}
+
 .feedback-modal-btn {
+  margin-top: 16px;
   line-height: 150%;
   display: block;
   margin: 0 auto;
@@ -172,6 +167,7 @@
 }
 @media screen and (min-width: 1440px) {
   .feedback-modal-btn {
+    margin-top: 80px;
     width: 177px;
   }
 }
