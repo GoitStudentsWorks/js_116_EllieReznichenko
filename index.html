@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/js_116_EllieReznichenko/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArtUnity</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+      integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/js_116_EllieReznichenko/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/js_116_EllieReznichenko/assets/vendor-BuJqGh_H.js">
+    <link rel="stylesheet" crossorigin href="/js_116_EllieReznichenko/assets/vendor-wjhWB3DI.css">
+    <link rel="stylesheet" crossorigin href="/js_116_EllieReznichenko/assets/index-BaLMiGX-.css">
+  </head>
+  <body>
+    <header class="header">
+  <div class="container header-container">
+    <nav class="nav">
+      <a href="./index.html" class="logo-header svg">
+        <svg class="icon-logo" width="119" height="51">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-full-logo"></use>
+        </svg>
+      </a>
+      <ul class="nav-list">
+        <li class="nav-li"><a class="nav-link" href="#artists">Artists</a></li>
+        <li class="nav-li"><a class="nav-link" href="#about">About Us</a></li>
+        <li class="nav-li"><a class="nav-link" href="#reviews">Reviews</a></li>
+      </ul>
+    </nav>
+
+    <button type="button" class="header-burger svg" data-header-open>
+      <svg class="burger-s" width="24" height="24">
+        <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-burger"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+    <div class="mob-menu" data-menu>
+  <div class="container mobile-menu-container">
+    <div class="mob-menu-wrap">
+      <a href="/index.html" class="mob-menu-logo">
+        <svg class="mob-menu-logo-icon" width="119" height="51">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-full-logo"></use>
+        </svg>
+      </a>
+      <button type="button" class="button mob-menu-close" data-menu-close>
+        <svg class="mob-menu-close-icon" width="24" height="24">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mob-nav">
+      <ul class="mob-nav-list">
+        <li class="mob-nav-li">
+          <a class="mob-nav-link" href="#artists">Artists</a>
+        </li>
+        <li class="mob-nav-li">
+          <a class="mob-nav-link" href="#about">About Us</a>
+        </li>
+        <li class="mob-nav-li">
+          <a class="mob-nav-link" href="#reviews">Reviews</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+
+    <main>
+      <section class="hero">
+  <div class="container hero-container">
+    <div class="hero-container-text">
+      <h1 class="hero-title">Discover Your Next Favorite Artist Today</h1>
+      <p class="hero-text">
+        Dive into a world of music discoveries with ArtistsHub – your personal
+        guide to the boundless universe of sound. Explore, filter, and learn
+        about your favorite artists all in one place.
+      </p>
+      <button id="explore-artists" class="hero-btn">
+        Explore Artists
+        <svg class="hero-icon" width="24" height="24">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-right-arrow-button"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="background-container">
+      <div class="column column-left" id="column-left"></div>
+      <div class="column column-right" id="column-right"></div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  document.getElementById('explore-artists').addEventListener('click', () => {
+    document.getElementById('artists').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+      <section class="artists-section" id="artists">
+  <div class="container artists-container">
+    <h2 class="artists-section-title">Artists</h2>
+    <p class="artists-section-subtitle">Explore Your New Favorite Artists</p>
+
+    <ul id="artists-grid" class="artists-list"></ul>
+
+    <button id="load-more-btn" class="load-more-btn">
+      <span class="btn-text">Load More</span>
+      <svg class="icon load-more-btn-icon" width="24" height="24">
+        <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-down-arrow-load-more"></use>
+      </svg>
+      <span class="loader-spinner visually-hidden"></span>
+    </button>
+  </div>
+</section>
+
+      <section id="about" class="about-us container-about-us">
+  <div class="flex-container container">
+    <div class="photo-section-aboutUs aboutUs_container">
+      <picture class="image-wrapper">
+        <source
+          media="(max-width: 767px)"
+          srcset="/js_116_EllieReznichenko/assets/aboutUs_1x-ByGvp7ke.webp 1x, /js_116_EllieReznichenko/assets/aboutUs_2x-ChaRTdtB.webp 2x"
+        />
+
+        <source
+          media="(min-width: 768px) and (max-width: 1439px)"
+          srcset="/js_116_EllieReznichenko/assets/aboutUs_tablet_1x-BKZecbCs.webp 1x, /js_116_EllieReznichenko/assets/aboutUs_tablet_2x-B03HsXh7.webp 2x"
+        />
+
+        <source
+          media="(min-width: 1440px)"
+          srcset="/js_116_EllieReznichenko/assets/about-us_pk_1x-Dv7_o7_7.webp 1x, /js_116_EllieReznichenko/assets/about_us_pk_2x-CeadzS5E.webp 2x"
+        />
+
+        <img
+          src="/js_116_EllieReznichenko/assets/aboutUs_1x-ByGvp7ke.webp"
+          alt="about_us"
+          class="photo-aboutUs"
+        />
+      </picture>
+    </div>
+
+    <div class="aboutUs-list-text test-two">
+      <a href="" class="aboutUs-svg-list">
+        <svg class="aboutUs-svg" width="64" height="64">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-logo-short"></use>
+        </svg>
+      </a>
+
+      <h2 class="aboutUs-artistsHub">About ArtistsHub</h2>
+      <p class="aboutUs-text">
+        At ArtistsHub, our mission is to connect music lovers with the artists
+        they adore. We strive to create a vibrant community where discovering
+        new music is as enjoyable as listening to it.
+      </p>
+    </div>
+  </div>
+</section>
+
+      <section class="container_feedback" id="reviews">
+  <div class="container">
+    <div class="swiper">
+      <div class="swiper-wrapper"></div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev">
+        <svg class="icon">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#slider-arrow-1"></use>
+        </svg>
+      </div>
+      <div class="swiper-button-next">
+        <svg class="icon">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#slider-arrow-2"></use>
+        </svg>
+      </div>
+      <button class="feedback-modal-btn" type="button" data-feedback-modal-open>
+        <span>Leave feedback</span>
+      </button>
+    </div>
+  </div>
+  <div
+    class="feedback-modal-notification is-hidden"
+    role="alert"
+    aria-live="polite"
+  ></div>
+</section>
+
+    </main>
+
+    <footer class="footer-section">
+  <div class="container">
+    <div class="footer-content">
+      <a href="./index.html" class="footer-logo">
+        <svg class="footer-logo-icon" width="84" height="36">
+          <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-full-logo"></use>
+        </svg>
+      </a>
+
+      <nav class="footer-nav">
+        <ul class="footer-nav-list">
+          <li class="footer-nav-item">
+            <a class="footer-nav-link" href="#artists">Artists</a>
+          </li>
+          <li class="footer-nav-item">
+            <a class="footer-nav-link" href="#about">About us</a>
+          </li>
+          <li class="footer-nav-item">
+            <a class="footer-nav-link" href="#reviews">Reviews</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-links">
+      <ul class="footer-links-list">
+        <li class="footer-links-item">
+          <a
+            href="https://www.instagram.com/"
+            class="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="footer-links-icon in-icon" width="40" height="40">
+              <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="footer-links-item">
+          <a
+            href="https://www.facebook.com/"
+            class="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="footer-links-icon" width="40" height="40">
+              <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-Facebook"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="footer-links-item">
+          <a
+            href="https://www.youtube.com/"
+            class="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="footer-links-icon" width="40" height="40">
+              <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-Youtube"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+      <p class="footer-art">© 2025 ArtistsHub. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+    <section>
+  <div class="modal" id="artist-modal">
+    <div class="modal-content"></div>
+  </div>
+  <div class="loader" style="display: none"></div>
+</section>
+
+    <div class="feedback-modal-overlay is-hidden" data-feedback-modal>
+  <div class="feedback-modal-window">
+    <button type="button" class="feedback-modal-close" data-feedback-modal-close aria-label="Close modal">
+      <svg class="feedback-modal-close-icon" width="16" height="15" aria-hidden="true" focusable="false">
+        <use href="/js_116_EllieReznichenko/assets/sprite-CLUDtRi5.svg#icon-close"></use>
+      </svg>
+    </button>
+    <h2 class="feedback-modal-title">Submit feedback</h2>
+    <form class="feedback-modal-form" novalidate>
+      <ul class="feedback-modal-list">
+        <li class="feedback-modal-item">
+          <label for="user-name" class="feedback-modal-label">Name</label>
+          <input id="user-name" type="text" class="feedback-modal-input" name="user-name" placeholder="Emily"
+            minlength="2" required />
+        </li>
+        <li class="feedback-modal-item">
+          <label for="user-message" class="feedback-modal-label">Message</label>
+          <textarea id="user-message" class="feedback-modal-input feedback-modal-input-tex" name="user-message"
+            placeholder="Type your message..." rows="3" required></textarea>
+        </li>
+      </ul>
+      <div class="feedback-modal-stars" id="feedback-star-rating"></div>
+      <button type="submit" class="feedback-modal-submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+  </body>
+</html>
