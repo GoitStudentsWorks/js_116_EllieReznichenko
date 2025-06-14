@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/ArtUnity/",
+    "build": "vite build --base=/js_116_EllieReznichenko/",
     "preview": "vite preview"
   },
   "devDependencies": {
